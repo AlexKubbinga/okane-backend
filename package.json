@@ -1,0 +1,34 @@
+{
+  "name": "okane-backend",
+  "version": "1.0.0",
+  "description": "packages required for okane backend",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AlexKubbinga/okane-backend.git"
+  },
+  "author": "Okane Team",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AlexKubbinga/okane-backend/issues"
+  },
+  "homepage": "https://github.com/AlexKubbinga/okane-backend#readme",
+  "dependencies": {
+    "@koa/cors": "^3.4.2",
+    "@types/jest": "^29.1.2",
+    "@types/koa": "^2.13.5",
+    "@types/koa-bodyparser": "^4.3.8",
+    "@types/koa-router": "^7.4.4",
+    "@types/mocha": "^10.0.0",
+    "@types/node": "^18.8.3",
+    "dotenv": "^16.0.3",
+    "koa": "^2.13.4",
+    "koa-bodyparser": "^4.3.0",
+    "koa-router": "^12.0.0",
+    "sequelize": "^6.24.0",
+    "typescript": "^4.8.4"
+  }
+}
