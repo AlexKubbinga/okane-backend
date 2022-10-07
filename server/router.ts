@@ -1,7 +1,8 @@
 import Router from 'koa-router';
 const router = new Router();
-import { postUserData } from './controllers/user';
+import { postUserData, getUserData } from './controllers/user';
 
 router.post('/post', postUserData);
-router.get('/', () => console.log('hello'));
+router.get('/get', getUserData);
+
 export default router;

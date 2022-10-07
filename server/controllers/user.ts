@@ -1,11 +1,20 @@
-const userDataModel = require('../models/index.ts');
+import { db } from '../models/db';
 
-export const postUserData = (ctx) => {
+export const postUserData = (ctx: any) => {
 	try {
 		const data = ctx.request.body;
-		userDataModel.insertIntoDb(data);
+		db.sequelize.create(data);
 		ctx.status = 201;
 	} catch (err) {
-		console.log('Controller Post', err);
+		console.log('Post Data Request:', err);
+	}
+};
+
+export const getUserData = (ctx: any) => {
+	try {
+		db.sequelize.findAll();
+		ctx.status = 200;
+	} catch (err) {
+		console.log('Get User Request:', err);
 	}
 };
