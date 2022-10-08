@@ -3,7 +3,6 @@ import { AllowNull } from 'sequelize-typescript';
 import { SequelizeAttributes } from '../SequelizeAttributes';
 
 export interface UserTypeAttributes {
-	id: number;
 	id_hash: string;
 	name: string;
 	createdAt: Date;
@@ -12,10 +11,7 @@ export interface UserTypeAttributes {
 
 export interface UserMethods
 	extends Model<UserTypeAttributes>,
-		UserTypeAttributes {
-	// postUserData;
-	// getUserData;
-}
+		UserTypeAttributes {}
 
 type DataTypes = typeof DataTypes;
 
