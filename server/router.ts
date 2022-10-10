@@ -1,6 +1,6 @@
 import Router from 'koa-router';
 const router = new Router();
-import { postUserData, getUserData } from './controllers/user';
+import { postUserData, getUserData } from './controllers/users';
 import { getCategories } from './controllers/categories';
 import { getSubscriptions } from './controllers/subscriptions';
 import { getTransactions } from './controllers/transactions';
