@@ -48,15 +48,16 @@ export type BodyLogin = {
 export const login = async (ctx: Koa.Context) => {
   try {
     const body = ctx.request.body as BodyLogin;
-
+    console.log('Body from request: ', body);
     const user = await db.users.findOne({
-      email: body?.email,
+      where: { email: body?.email }
     });
     if (!user) {
       ctx.status = 404;
       ctx.body = 'User Not Found';
       return;
     }
+    console.log('User found on db: ', user);
 
     const validPassword = await bcrypt.compare(body.password, user.password);
 
@@ -68,15 +69,9 @@ export const login = async (ctx: Koa.Context) => {
 
     const sessionJwt = createSession(user.id_hash);
     console.log('New session JWT created: ', sessionJwt);
-    ctx.cookie('sessionJwt', sessionJwt);
+    // TODO: Update the cookie options here to make them more secure
+    ctx.cookies.set('sessionJwt', sessionJwt);
     ctx.body = user.id_hash;
-    // const safeUser: SafeUserType = {
-    // 	id_hash: user.id_hash,
-    // 	picture: user.picture,
-    // 	username: user.username,
-    // 	followers: user.followers,
-    // 	following: user.following,
-    // };
     ctx.status = 200;
   } catch (error) {
     // console.log(error)
