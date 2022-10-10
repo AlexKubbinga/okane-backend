@@ -12,9 +12,21 @@ const PORT = process.env.SERVER_PORT;
 const app = new Koa();
 const cors = require('@koa/cors');
 
-app.use(cors());
+
+app.use(cors({ allroutes: true, origin: '*', credentials: true}));
 app.use(bodyParser());
 app.use(route.routes());
+
+// Middleware to use/decode jwt
+app.use((ctx, next) => {
+  const authHeader = ctx.cookies.get('sessionJwt');
+  console.log('AuthHeader found: ', authHeader);
+  if (authHeader) {
+    ctx.headers.authorization = `Bearer ${authHeader}`;
+  }
+  // const authHeader = ctx.cookies.sessionJwt;
+  next();
+});
 
 (async () => {
   await db.sequelize.sync();
