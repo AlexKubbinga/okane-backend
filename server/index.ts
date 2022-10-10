@@ -24,7 +24,6 @@ app.use((ctx, next) => {
   if (authHeader) {
     ctx.headers.authorization = `Bearer ${authHeader}`;
   }
-  // const authHeader = ctx.cookies.sessionJwt;
   next();
 });
 

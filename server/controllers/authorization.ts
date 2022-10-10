@@ -5,7 +5,6 @@ import { createSession, expireSession } from '../session/stateless';
 import jwt_decode from 'jwt-decode';
 import db from '../models/db';
 import Koa from 'koa';
-import { stringify } from 'querystring';
 
 // //REGISTER
 
@@ -71,7 +70,7 @@ export const login = async (ctx: Koa.Context) => {
     console.log('New session JWT created: ', sessionJwt);
     // TODO: Update the cookie options here to make them more secure
     ctx.cookies.set('sessionJwt', sessionJwt);
-    ctx.body = user.id_hash;
+    ctx.body = sessionJwt;
     ctx.status = 200;
   } catch (error) {
     // console.log(error)
@@ -92,23 +91,17 @@ const validateJwt = (cookie: CookieType) => {
 
 export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
   try {
-    const jwt = ctx.request.header.cookie || false;
+    const jwt = ctx.cookies.get('sessionJwt') || false;
     if (jwt) {
-      let token = jwt
-        .split(';')
-        .find((c) => c.trim().startsWith('sessionJwt='))
-        ?.split('=')[1];
-      if (token) {
-        console.log('Token found: ', jwt);
-        const cookie: CookieType = jwt_decode(token);
-        console.log('Validating cookie: ', cookie);
-        if (cookie) {
-          validateJwt(cookie);
-          ctx.locals.userId = cookie.id_hash;
-          next();
-        } else {
-          throw new Error('No cookie present');
-        }
+      console.log('Token found: ', jwt);
+      const cookie: CookieType = jwt_decode(jwt);
+      console.log('Validating cookie: ', cookie);
+      if (cookie) {
+        validateJwt(cookie);
+        ctx.state.id_hash = cookie.id_hash;
+        next();
+      } else {
+        throw new Error('No cookie present');
       }
     }
   } catch (err) {
@@ -119,8 +112,8 @@ export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
 // ONCE THE CHECKTOKEN ABOVE HAS VALIDATED WE CAN PROVIDE THE USERID
 export const validated = (ctx: Koa.Context) => {
   try {
-    console.log('Cookie validated, sending user ID: ', ctx.locals.userId);
-    ctx.body = JSON.stringify({ userId: ctx.locals.userId });
+    console.log('Cookie validated, sending user ID: ', ctx.state.id_hash);
+    ctx.body = JSON.stringify({ userId: ctx.state.id_hash });
   } catch (err) {
     console.log('Error in server validated cookie response: ', err);
   }
