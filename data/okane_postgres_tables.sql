@@ -17,7 +17,7 @@ drop table if exists users;
 
 
 \echo 'CREATE TABLES'
-create table users ( id SERIAL PRIMARY KEY, id_hash varchar(255) not null, name varchar(255) not null, "createdAt" timestamp not null default CURRENT_TIMESTAMP, "updatedAt" timestamp );
+create table users ( id SERIAL PRIMARY KEY, id_hash varchar(255) not null, password varchar(255) not null, email varchar(255) not null, name varchar(255) not null, "createdAt" timestamp not null default CURRENT_TIMESTAMP, "updatedAt" timestamp );
 
 create table categories ( id SERIAL PRIMARY KEY, code varchar(255) not null, name varchar(255) not null, "createdAt" timestamp not null default CURRENT_TIMESTAMP, "updatedAt" timestamp );
 
