@@ -1,8 +1,10 @@
 const Sequelize = require('sequelize');
 
 import { UserFactory } from './users';
-import { SubscriptionFactory } from './subscriptions';
 import { CategoryFactory } from './categories';
+import { SubscriptionFactory } from './subscriptions';
+import { MerchantFactory } from './merchants';
+import { TransactionFactory } from './transactions';
 import path from 'path';
 import * as dotenv from 'dotenv';
 
@@ -21,8 +23,10 @@ const db: DbModel = {
 	sequelize,
 	Sequelize,
 	users: UserFactory(sequelize, Sequelize),
-	subscriptions: SubscriptionFactory(sequelize, Sequelize),
 	categories: CategoryFactory(sequelize, Sequelize),
+	subscriptions: SubscriptionFactory(sequelize, Sequelize),
+	merchants: MerchantFactory(sequelize, Sequelize),
+	transactions: TransactionFactory(sequelize, Sequelize),
 };
 
 export const test = async () => {

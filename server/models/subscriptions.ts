@@ -2,6 +2,7 @@ import { Sequelize, DataTypes, Model } from 'sequelize';
 import { SequelizeAttributes } from '../SequelizeAttributes';
 
 export interface SubscriptionTypeAttributes {
+	id: number;
 	code: string;
 	name: string;
 	createdAt: Date;
@@ -19,6 +20,11 @@ export const SubscriptionFactory = (
 	DataTypes: DataTypes
 ) => {
 	const attributes: SequelizeAttributes<SubscriptionTypeAttributes> = {
+		id: {
+			type: DataTypes.NUMBER,
+			allowNull: false,
+			primaryKey: true,
+		},
 		code: {
 			type: DataTypes.STRING,
 			allowNull: false,
