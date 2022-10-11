@@ -32,22 +32,28 @@ const db: DbModel = {
 db.categories.hasMany(db.transactions, {
   foreignKey: 'category_id',
 });
-db.transactions.belongsTo(db.categories);
+db.transactions.belongsTo(db.categories, { foreignKey: 'category_id' });
 
-// db.users.hasMany(db.transactions, {
-//   foreignKey: 'user_id',
-// });
-// db.transactions.belongsTo(db.users);
+db.users.hasMany(db.transactions, {
+  foreignKey: 'user_id',
+});
+db.transactions.belongsTo(db.users, {
+  foreignKey: 'user_id',
+});
 
-// db.subscriptions.hasMany(db.transactions, {
-//   foreignKey: 'subscription_id',
-// });
-// db.transactions.belongsTo(db.subscriptions);
+db.subscriptions.hasMany(db.transactions, {
+  foreignKey: 'subscription_id',
+});
+db.transactions.belongsTo(db.subscriptions, {
+  foreignKey: 'subscription_id',
+});
 
-// db.merchants.hasMany(db.transactions, {
-//   foreignKey: 'merchant_id',
-// });
-// db.transactions.belongsTo(db.merchants);
+db.merchants.hasMany(db.transactions, {
+  foreignKey: 'merchant_id',
+});
+db.transactions.belongsTo(db.merchants, {
+  foreignKey: 'merchant_id',
+});
 
 export const test = async () => {
   try {
