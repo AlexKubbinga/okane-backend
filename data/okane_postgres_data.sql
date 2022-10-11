@@ -748,7 +748,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-08-23 01:00:00-00', '2022-08-31', 'GBP',
+  '2022-08-23 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
