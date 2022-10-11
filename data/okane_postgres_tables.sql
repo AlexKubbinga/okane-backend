@@ -28,6 +28,7 @@ create table merchants ( id SERIAL PRIMARY KEY, code varchar(255) not null, name
 create table transactions ( 
     id SERIAL PRIMARY KEY,
     date timestamp not null,
+    month_end_date timestamp not null,
     ccy varchar(255) not null,
     user_id smallint not null references users(id),
     user_id_hash varchar(255) not null,
