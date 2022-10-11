@@ -1,5 +1,5 @@
 const Sequelize = require('sequelize');
-
+import { DataTypes } from 'sequelize';
 import { UserFactory } from './users';
 import { CategoryFactory } from './categories';
 import { SubscriptionFactory } from './subscriptions';
@@ -16,32 +16,52 @@ const NAME = process.env.DB_NAME;
 
 const sequelize = new Sequelize(`postgres://${USER}${HOST}:${PORT}/${NAME}`);
 interface DbModel {
-	[key: string]: any;
+  [key: string]: any;
 }
 
 const db: DbModel = {
-	sequelize,
-	Sequelize,
-	users: UserFactory(sequelize, Sequelize),
-	categories: CategoryFactory(sequelize, Sequelize),
-	subscriptions: SubscriptionFactory(sequelize, Sequelize),
-	merchants: MerchantFactory(sequelize, Sequelize),
-	transactions: TransactionFactory(sequelize, Sequelize),
+  sequelize,
+  Sequelize,
+  users: UserFactory(sequelize, DataTypes),
+  categories: CategoryFactory(sequelize, DataTypes),
+  subscriptions: SubscriptionFactory(sequelize, DataTypes),
+  merchants: MerchantFactory(sequelize, DataTypes),
+  transactions: TransactionFactory(sequelize, DataTypes),
 };
 
+db.categories.hasMany(db.transactions, {
+  foreignKey: 'category_id',
+});
+db.transactions.belongsTo(db.categories);
+
+// db.users.hasMany(db.transactions, {
+//   foreignKey: 'user_id',
+// });
+// db.transactions.belongsTo(db.users);
+
+// db.subscriptions.hasMany(db.transactions, {
+//   foreignKey: 'subscription_id',
+// });
+// db.transactions.belongsTo(db.subscriptions);
+
+// db.merchants.hasMany(db.transactions, {
+//   foreignKey: 'merchant_id',
+// });
+// db.transactions.belongsTo(db.merchants);
+
 export const test = async () => {
-	try {
-		await sequelize.authenticate();
-		console.log('DB Connection is successful.');
-	} catch (err) {
-		console.log('DB connection failed', err);
-	}
+  try {
+    await sequelize.authenticate();
+    console.log('DB Connection is successful.');
+  } catch (err) {
+    console.log('DB connection failed', err);
+  }
 };
 
 Object.keys(db).forEach((modelName: string) => {
-	if ('associate' in db[modelName]) {
-		db[modelName].associate(db);
-	}
+  if ('associate' in db[modelName]) {
+    db[modelName].associate(db);
+  }
 });
 
 db.sequelize = sequelize;
