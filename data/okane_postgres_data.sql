@@ -85,7 +85,7 @@ insert into merchants ( code, name, short_name ) values ( 'HFX', 'Halifax', 'hal
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-01-17', '2022-01-31', 'GBP',
+  '2022-01-17 00:00:00-00', '2022-01-31 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -96,7 +96,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-01-31', '2022-01-31', 'GBP',
+  '2022-01-31 00:00:00-00', '2022-01-31 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -107,7 +107,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-01-01', '2022-01-31', 'GBP',
+  '2022-01-01', '2022-01-31 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -118,7 +118,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-01-23', '2022-01-23', 'GBP',
+  '2022-01-23 00:00:00-00', '2022-01-31 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -129,7 +129,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-01-12', '2022-01-31', 'GBP',
+  '2022-01-12 00:00:00-00', '2022-01-31 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -140,7 +140,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-01-01', '2022-01-31', 'GBP',
+  '2022-01-01 00:00:00-00', '2022-01-31 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -151,7 +151,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-01-19', '2022-01-31', 'GBP',
+  '2022-01-19 00:00:00-00', '2022-01-31 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -162,7 +162,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-01-13', '2022-01-31', 'GBP',
+  '2022-01-13 00:00:00-00', '2022-01-31 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -175,7 +175,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-02-17', '2022-02-28', 'GBP',
+  '2022-02-17 00:00:00-00', '2022-02-28 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -186,7 +186,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-02-28', '2022-02-28', 'GBP',
+  '2022-02-28 00:00:00-00', '2022-02-28 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -197,7 +197,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-02-01', '2022-02-28', 'GBP',
+  '2022-02-01 00:00:00-00', '2022-02-28 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -208,7 +208,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-02-23', '2022-02-28', 'GBP',
+  '2022-02-23 00:00:00-00', '2022-02-28 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -219,7 +219,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-02-12', '2022-02-28', 'GBP',
+  '2022-02-12 00:00:00-00', '2022-02-28 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -230,7 +230,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-02-01', '2022-02-28', 'GBP',
+  '2022-02-01 00:00:00-00', '2022-02-28 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -241,7 +241,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-02-19', '2022-02-28', 'GBP',
+  '2022-02-19 00:00:00-00', '2022-02-28 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -252,7 +252,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-02-19', '2022-02-28', 'GBP',
+  '2022-02-19 00:00:00-00', '2022-02-28 00:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -265,7 +265,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-03-17', '2022-03-31', 'GBP',
+  '2022-03-17 01:00:00-00', '2022-03-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -276,7 +276,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-03-31', '2022-03-31', 'GBP',
+  '2022-03-31 01:00:00-00', '2022-03-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -287,7 +287,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-03-01', '2022-03-31', 'GBP',
+  '2022-03-01 01:00:00-00', '2022-03-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -298,7 +298,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-03-23', '2022-03-31', 'GBP',
+  '2022-03-23 01:00:00-00', '2022-03-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -309,7 +309,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-03-12', '2022-03-31', 'GBP',
+  '2022-03-12 01:00:00-00', '2022-03-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -320,7 +320,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-03-01', '2022-03-31', 'GBP',
+  '2022-03-01 01:00:00-00', '2022-03-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -331,7 +331,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-03-19', '2022-03-31', 'GBP',
+  '2022-03-19 01:00:00-00', '2022-03-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -342,7 +342,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-03-19', '2022-03-31', 'GBP',
+  '2022-03-19 01:00:00-00', '2022-03-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -355,7 +355,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-04-17', '2022-04-30', 'GBP',
+  '2022-04-17 01:00:00-00', '2022-04-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -366,7 +366,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-04-30', '2022-04-30', 'GBP',
+  '2022-04-30 01:00:00-00', '2022-04-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -377,7 +377,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-04-01', '2022-04-30', 'GBP',
+  '2022-04-01 01:00:00-00', '2022-04-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -388,7 +388,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-04-23', '2022-04-30', 'GBP',
+  '2022-04-23 01:00:00-00', '2022-04-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -399,7 +399,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-04-12', '2022-04-30', 'GBP',
+  '2022-04-12 01:00:00-00', '2022-04-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -410,7 +410,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-04-01', '2022-04-30', 'GBP',
+  '2022-04-01 01:00:00-00', '2022-04-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -421,7 +421,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-04-19', '2022-04-30', 'GBP',
+  '2022-04-19 01:00:00-00', '2022-04-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -432,7 +432,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-04-19', '2022-04-30', 'GBP',
+  '2022-04-19 01:00:00-00', '2022-04-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -445,7 +445,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-05-17', '2022-05-31', 'GBP',
+  '2022-05-17 01:00:00-00', '2022-05-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -456,7 +456,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-05-31', '2022-05-31', 'GBP',
+  '2022-05-31 01:00:00-00', '2022-05-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -467,7 +467,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-05-01', '2022-05-31', 'GBP',
+  '2022-05-01 01:00:00-00', '2022-05-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -478,7 +478,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-05-23', '2022-05-31', 'GBP',
+  '2022-05-23 01:00:00-00', '2022-05-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -489,7 +489,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-05-12', '2022-05-31', 'GBP',
+  '2022-05-12 01:00:00-00', '2022-05-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -500,7 +500,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-05-01', '2022-05-31', 'GBP',
+  '2022-05-01 01:00:00-00', '2022-05-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -511,7 +511,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-05-19', '2022-05-31', 'GBP',
+  '2022-05-19 01:00:00-00', '2022-05-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -522,7 +522,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-05-19', '2022-05-31', 'GBP',
+  '2022-05-19 01:00:00-00', '2022-05-31', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -535,7 +535,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-06-17', '2022-06-30', 'GBP',
+  '2022-06-17 01:00:00-00', '2022-06-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -546,7 +546,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-06-30', '2022-06-30', 'GBP',
+  '2022-06-30 01:00:00-00', '2022-06-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -557,7 +557,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-06-01', '2022-06-30', 'GBP',
+  '2022-06-01 01:00:00-00', '2022-06-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -568,7 +568,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-06-23', '2022-06-30', 'GBP',
+  '2022-06-23 01:00:00-00', '2022-06-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -579,7 +579,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-06-12', '2022-06-30', 'GBP',
+  '2022-06-12 01:00:00-00', '2022-06-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -590,7 +590,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-06-01', '2022-06-30', 'GBP',
+  '2022-06-01 01:00:00-00', '2022-06-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -601,7 +601,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-06-19', '2022-06-30', 'GBP',
+  '2022-06-19 01:00:00-00', '2022-06-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -612,7 +612,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-06-19', '2022-06-30', 'GBP',
+  '2022-06-19 01:00:00-00', '2022-06-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -625,7 +625,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-07-17', '2022-07-31', 'GBP',
+  '2022-07-17 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -636,7 +636,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-07-31', '2022-07-31', 'GBP',
+  '2022-07-31 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -647,7 +647,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-07-01', '2022-07-31', 'GBP',
+  '2022-07-01 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -658,7 +658,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-07-23', '2022-07-31', 'GBP',
+  '2022-07-23 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -669,7 +669,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-07-12', '2022-07-31', 'GBP',
+  '2022-07-12 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -680,7 +680,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-07-01', '2022-07-31', 'GBP',
+  '2022-07-01 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -691,7 +691,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-07-19', '2022-07-31', 'GBP',
+  '2022-07-19 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -702,7 +702,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-07-19', '2022-07-31', 'GBP',
+  '2022-07-19 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -715,7 +715,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-08-17', '2022-08-31', 'GBP',
+  '2022-08-17 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -726,7 +726,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-08-31', '2022-08-31', 'GBP',
+  '2022-08-31 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -737,7 +737,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-08-01', '2022-08-31', 'GBP',
+  '2022-08-01 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -748,7 +748,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-08-23', '2022-08-31', 'GBP',
+  '2022-08-23 01:00:00-00', '2022-08-31', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -759,7 +759,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly)
 values
 (
-  '2022-08-12', '2022-08-31', 'GBP',
+  '2022-08-12 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -770,7 +770,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-08-01', '2022-08-31', 'GBP',
+  '2022-08-01 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -781,7 +781,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-08-19', '2022-08-31', 'GBP',
+  '2022-08-19 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -792,7 +792,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-08-19', '2022-08-31', 'GBP',
+  '2022-08-19 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -805,7 +805,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-17', '2022-09-30', 'GBP',
+  '2022-09-17 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -816,7 +816,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-30', '2022-09-30', 'GBP',
+  '2022-09-30 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -827,7 +827,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-01', '2022-09-30', 'GBP',
+  '2022-09-01 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -838,7 +838,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-23', '2022-09-30', 'GBP',
+  '2022-09-23 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -849,7 +849,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly)
 values
 (
-  '2022-09-12', '2022-09-30', 'GBP',
+  '2022-09-12 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -860,7 +860,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-09-01', '2022-09-30', 'GBP',
+  '2022-09-01 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -871,7 +871,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-19', '2022-09-30', 'GBP',
+  '2022-09-19 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -882,7 +882,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-19', '2022-09-30', 'GBP',
+  '2022-09-19 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
@@ -895,7 +895,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-03', '2022-09-30', 'GBP',
+  '2022-09-03 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Scrooge McDuck'), (select id_hash from users where name = 'Scrooge McDuck'),
   (select id from merchants where code = 'NFLX'),
   (select id from subscriptions where code = 'STR'),
@@ -906,7 +906,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-12', '2022-09-30', 'GBP',
+  '2022-09-12 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Scrooge McDuck'), (select id_hash from users where name = 'Scrooge McDuck'),
   (select id from merchants where code = 'AMZN'),
   (select id from subscriptions where code = 'STR'),
@@ -917,7 +917,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-12', '2022-09-30', 'GBP',
+  '2022-09-12 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Scrooge McDuck'), (select id_hash from users where name = 'Scrooge McDuck'),
   (select id from merchants where code = 'DIS'),
   (select id from subscriptions where code = 'STR'),
@@ -928,7 +928,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-23', '2022-09-30', 'GBP',
+  '2022-09-23 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Scrooge McDuck'), (select id_hash from users where name = 'Scrooge McDuck'),
   (select id from merchants where code = 'APPL'),
   (select id from subscriptions where code = 'MBP'),
@@ -939,7 +939,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly)
 values
 (
-  '2022-09-18', '2022-09-30', 'GBP',
+  '2022-09-18 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Scrooge McDuck'), (select id_hash from users where name = 'Scrooge McDuck'),
   (select id from merchants where code = 'FF'),
   (select id from subscriptions where code = 'GYM'),
@@ -950,7 +950,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
 values
 (
-  '2022-09-07', '2022-09-30', 'GBP',
+  '2022-09-07 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Scrooge McDuck'), (select id_hash from users where name = 'Scrooge McDuck'),
   (select id from merchants where code = 'PTON'),
   (select id from subscriptions where code = 'GYM'),
@@ -961,7 +961,7 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-21', '2022-09-30', 'GBP',
+  '2022-09-21 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Scrooge McDuck'), (select id_hash from users where name = 'Scrooge McDuck'),
   (select id from merchants where code = 'BMW'),
   (select id from subscriptions where code = 'CFN'),
@@ -972,12 +972,13 @@ values
 insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd, value_ly )
 values
 (
-  '2022-09-27', '2022-09-30', 'GBP',
+  '2022-09-27 01:00:00-00', '2022-09-30 01:00:00-00', 'GBP',
   (select id from users where name = 'Scrooge McDuck'), (select id_hash from users where name = 'Scrooge McDuck'),
   (select id from merchants where code = 'HFX'),
   (select id from subscriptions where code = 'CCD'),
   (select id from categories where code = 'MON'),
   99.99, 99.99, 99.99
 );
+
 
 \echo 'CREATE DATA SUCCESS'
