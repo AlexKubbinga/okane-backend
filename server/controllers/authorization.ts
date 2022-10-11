@@ -5,15 +5,16 @@ import { createSession, expireSession } from '../session/stateless';
 import jwt_decode from 'jwt-decode';
 import db from '../models/db';
 import Koa from 'koa';
+import {v4 as uuidv4} from 'uuid';
 
 // //REGISTER
 
 export type BodyRegister = {
   email: string;
   password: string;
-  id_hash: string;
   name: string;
 };
+
 export const register = async (ctx: Koa.Context) => {
   console.log('Calling the register controller');
   try {
@@ -24,11 +25,16 @@ export const register = async (ctx: Koa.Context) => {
 
     //create new user
     const newUser = await db.users.create({
-      id_hash: body.id_hash,
+      id_hash: uuidv4(),
       name: body.name,
       email: body.email,
       password: hashedPassword,
     });
+
+    const sessionJwt = createSession(newUser.id_hash);
+    console.log('New session JWT created: ', sessionJwt);
+    // TODO: Update the cookie options here to make them more secure
+    ctx.cookies.set('sessionJwt', sessionJwt);
 
     console.log('New User created: ', newUser);
     ctx.status = 200;
@@ -84,9 +90,12 @@ const validateJwt = (cookie: CookieType) => {
   const currentTimeStamp = new Date().getTime() / 1000;
   const jwtExpired = cookie.expiresAt <= currentTimeStamp;
   // TODO: Check the JWT hash?
-  if (jwtExpired) {
-    throw new Error('Invalid cookie');
-  }
+  // Do we want an error?
+  // if (jwtExpired) {
+  //   throw new Error('Invalid cookie');
+  // }
+
+  return !jwtExpired;
 };
 
 export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
@@ -95,13 +104,14 @@ export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
     if (jwt) {
       // console.log('Token found: ', jwt);
       const cookie: CookieType = jwt_decode(jwt);
-      if (cookie) {
-        validateJwt(cookie);
+      if (cookie && validateJwt(cookie)) {
         ctx.state.id_hash = cookie.id_hash;
         console.log('Successful checkToken - running next middleware with cookie: ', cookie);
         return next();
       } else {
-        throw new Error('No cookie present');
+        // throw new Error('No cookie present');
+        console.log('No cookie present');
+        ctx.status = 200;
       }
     }
   } catch (err) {
