@@ -4,6 +4,7 @@ import { SequelizeAttributes } from '../SequelizeAttributes';
 
 export interface TransactionTypeAttributes {
   date: Date;
+  month_end_date: Date;
   ccy: String;
   user_id: Number;
   user_id_hash: String;
@@ -27,7 +28,11 @@ export const TransactionFactory = (
 ) => {
   const attributes: SequelizeAttributes<TransactionTypeAttributes> = {
     date: {
-      type: DataTypes.DATE,
+      type: DataTypes.DATEONLY,
+      allowNull: false,
+    },
+    month_end_date: {
+      type: DataTypes.DATEONLY,
       allowNull: false,
     },
     ccy: {
@@ -52,10 +57,6 @@ export const TransactionFactory = (
     },
     category_id: {
       type: DataTypes.NUMBER,
-      references: {
-        model: 'categories',
-        key: 'id',
-      },
       allowNull: false,
     },
     value: {
