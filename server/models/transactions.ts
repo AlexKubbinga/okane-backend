@@ -78,7 +78,6 @@ export const TransactionFactory = (
     TransactionTypeAttributes
   >('transactions', attributes, {
     freezeTableName: true,
-    underscored: true,
   });
   return transactions;
 };

@@ -7,7 +7,6 @@ import { firstOfXMonthsAgo } from '../utils/dates';
 
 export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
   try {
-    console.log('CALLING GET SUBSCRIPTIONS');
     const result = await db.transactions.findAll({
       where: {
         user_id_hash: '0xiiikkki112233',
@@ -26,14 +25,14 @@ export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
       include: [
         {
           model: db.subscriptions,
-          attributes: ['name'],
+          attributes: ['name', 'code'],
           required: true,
         },
       ],
     });
     const subs = result.map((sub: any) => {
       return {
-        subscription_id: sub.subscription_id,
+        subscription_id: sub.subscription.code,
         monthlyPrice: Number(sub.value),
         name: sub.subscription.name,
       };

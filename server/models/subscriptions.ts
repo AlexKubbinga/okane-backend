@@ -48,7 +48,6 @@ export const SubscriptionFactory = (
     SubscriptionTypeAttributes
   >('subscriptions', attributes, {
     freezeTableName: true,
-    underscored: true,
   });
   return subscriptions;
 };
