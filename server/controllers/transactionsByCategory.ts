@@ -1,6 +1,7 @@
 import Koa from 'koa';
 import { CategoryFactory } from '../models/categories';
 import db from '../models/db';
+const { Op } = require('sequelize');
 
 export const getTransactionsByCategory = async (ctx: Koa.Context) => {
   try {
@@ -15,7 +16,7 @@ export const getTransactionsByCategory = async (ctx: Koa.Context) => {
         },
       ],
     });
-    console.log(result);
+    console.log(typeof result[0].date);
     ctx.body = result;
     ctx.status = 200;
   } catch (err) {

@@ -1,23 +1,32 @@
 import Koa from 'koa';
 import { SubscriptionFactory } from '../models/subscriptions';
 import db from '../models/db';
+const { Op } = require('sequelize');
 
 export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
-	db.subscriptions.hasMany(db.transactions);
-	db.transactions.belongsTo(db.subscriptions);
+  try {
+    const today = new Date();
 
-	try {
-		const result = await db.transactions.findAll({
-			include: [
-				{
-					include: SubscriptionFactory,
-					required: true,
-				},
-			],
-		});
-		ctx.body = result;
-		ctx.status = 200;
-	} catch (err) {
-		console.log('Err @getTransactionsBySubscription', err);
-	}
+    const result = await db.transactions.findAll({
+      where: {
+        user_id_hash: '0xiiikkki112233',
+        date: {
+          [Op.gt]: [Date.now()],
+        },
+      },
+      attributes: ['date', 'ccy', 'subscription_id', 'value'],
+      include: [
+        {
+          model: db.subscriptions,
+          attributes: ['name'],
+          required: true,
+        },
+      ],
+    });
+    console.log(typeof result[0].date, result[0].date);
+    ctx.body = result;
+    ctx.status = 200;
+  } catch (err) {
+    console.log('Err @getTransactionsBySubscription', err);
+  }
 };

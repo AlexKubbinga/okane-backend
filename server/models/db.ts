@@ -29,6 +29,13 @@ const db: DbModel = {
   transactions: TransactionFactory(sequelize, DataTypes),
 };
 
+db.subscriptions.hasMany(db.transactions, {
+  foreignKey: 'subscription_id',
+});
+db.transactions.belongsTo(db.subscriptions, {
+  foreignKey: 'subscription_id',
+});
+
 db.categories.hasMany(db.transactions, {
   foreignKey: 'category_id',
 });
@@ -41,12 +48,12 @@ db.transactions.belongsTo(db.users, {
   foreignKey: 'user_id',
 });
 
-db.subscriptions.hasMany(db.transactions, {
-  foreignKey: 'subscription_id',
-});
-db.transactions.belongsTo(db.subscriptions, {
-  foreignKey: 'subscription_id',
-});
+// db.subscriptions.hasMany(db.transactions, {
+//   foreignKey: 'subscription_id',
+// });
+// db.transactions.belongsTo(db.subscriptions, {
+//   foreignKey: 'subscription_id',
+// });
 
 db.merchants.hasMany(db.transactions, {
   foreignKey: 'merchant_id',
