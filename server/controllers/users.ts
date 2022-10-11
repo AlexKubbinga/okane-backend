@@ -14,6 +14,7 @@ export const postUserData = (ctx: Koa.Context) => {
 export const getUserData = async (ctx: Koa.Context) => {
 	try {
 		const allUsers = await db.users.findAll();
+		console.log('Users found: ', allUsers)
 		ctx.body = allUsers;
 		ctx.status = 200;
 	} catch (err) {

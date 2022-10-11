@@ -31,8 +31,9 @@ export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
         },
       ],
     });
+    const output = { date: result.date, name: result.subscription.name };
     // console.log(typeof result[0].date, result[0].date);s
-    ctx.body = result;
+    ctx.body = output;
     ctx.status = 200;
   } catch (err) {
     console.log('Err @getTransactionsBySubscription', err);

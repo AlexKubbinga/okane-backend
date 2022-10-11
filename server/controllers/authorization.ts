@@ -93,13 +93,13 @@ export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
   try {
     const jwt = ctx.cookies.get('sessionJwt') || false;
     if (jwt) {
-      console.log('Token found: ', jwt);
+      // console.log('Token found: ', jwt);
       const cookie: CookieType = jwt_decode(jwt);
-      console.log('Validating cookie: ', cookie);
       if (cookie) {
         validateJwt(cookie);
         ctx.state.id_hash = cookie.id_hash;
-        next();
+        console.log('Successful checkToken - running next middleware with cookie: ', cookie);
+        return next();
       } else {
         throw new Error('No cookie present');
       }
@@ -123,7 +123,7 @@ export const removeToken = (ctx: Koa.Context) => {
   try {
     const sessionJwt = expireSession();
     console.log('Expired JWT created: ', sessionJwt);
-    ctx.cookie('sessionJwt', sessionJwt);
+    ctx.cookies.set('sessionJwt', sessionJwt);
     ctx.status = 204;
   } catch (err) {
     console.log('Error removing cookie in backend: ', err);
