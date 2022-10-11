@@ -14,7 +14,9 @@ const USER = process.env.DB_USER;
 const HOST = process.env.DB_HOST;
 const NAME = process.env.DB_NAME;
 
-const sequelize = new Sequelize(`postgres://${USER}${HOST}:${PORT}/${NAME}`);
+const sequelize = new Sequelize(`postgres://${USER}${HOST}:${PORT}/${NAME}`, {
+  timestamps: false,
+});
 interface DbModel {
   [key: string]: any;
 }

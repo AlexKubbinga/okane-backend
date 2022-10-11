@@ -1,7 +1,9 @@
 import Koa from 'koa';
 import { SubscriptionFactory } from '../models/subscriptions';
 import db from '../models/db';
-const { Op } = require('sequelize');
+import sequelize from 'sequelize';
+import { Op } from 'sequelize';
+import { sub } from 'date-fns';
 
 export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
   try {
