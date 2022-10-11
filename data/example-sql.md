@@ -11,7 +11,6 @@ join subscriptions s on s.id = t.subscription_id
 where c.code in ('ENT','FIT')
 and t.date = '2022-09-30'
 group by t.date, c.code, s.code, s.name;
-and t.date = '2022-09-30';
 
 // \
 // Merchants by Subscription, inc history \
