@@ -3,20 +3,26 @@ import { SubscriptionFactory } from '../models/subscriptions';
 import db from '../models/db';
 import sequelize from 'sequelize';
 import { Op } from 'sequelize';
-import { sub } from 'date-fns';
+import { firstOfXMonthsAgo } from '../utils/dates';
 
 export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
   try {
-    const today = new Date();
+    console.log();
 
     const result = await db.transactions.findAll({
       where: {
         user_id_hash: '0xiiikkki112233',
         date: {
-          [Op.gt]: [Date.now()],
+          [Op.gt]: firstOfXMonthsAgo(1),
         },
       },
-      attributes: ['date', 'ccy', 'subscription_id', 'value'],
+      attributes: [
+        'date',
+        'ccy',
+        'subscription_id',
+        [sequelize.fn('sum', sequelize.col('value')), 'value'],
+      ],
+      group: ['subscription_id', 'date', 'ccy', 'subscription.id', 'name'],
       include: [
         {
           model: db.subscriptions,
@@ -25,7 +31,7 @@ export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
         },
       ],
     });
-    console.log(typeof result[0].date, result[0].date);
+    // console.log(typeof result[0].date, result[0].date);s
     ctx.body = result;
     ctx.status = 200;
   } catch (err) {

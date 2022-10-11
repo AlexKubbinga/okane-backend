@@ -1,13 +1,13 @@
 import Koa from 'koa';
 import { CategoryFactory } from '../models/categories';
 import db from '../models/db';
-const { Op } = require('sequelize');
 
 export const getTransactionsByCategory = async (ctx: Koa.Context) => {
   try {
     const result = await db.transactions.findAll({
       where: {
         user_id_hash: '0xiiikkki112234',
+        date: db.sequelize.fn('DATE', '2022-09-30'),
       },
       include: [
         {
