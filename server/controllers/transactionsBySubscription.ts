@@ -9,7 +9,7 @@ export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
   try {
     const result = await db.transactions.findAll({
       where: {
-        user_id_hash: '0xiiikkki112233',
+        user_id_hash: ctx.state.id_hash,
         subscription_id: { [Op.eq]: sequelize.col('subscription.id') },
         date: {
           [Op.gt]: firstOfXMonthsAgo(1),

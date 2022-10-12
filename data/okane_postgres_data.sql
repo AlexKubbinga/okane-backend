@@ -17,7 +17,7 @@ truncate table users cascade;
 \echo 'CREATE DATA'
 
 \echo 'CREATE USERS DATA'
-insert into users ( id_hash, name, password, email ) values ( '0xiiikkki112233', 'Simon Roope', '1234', 'simonroope@email.com' );
+insert into users ( id_hash, name, password, email ) values ( '0xiiikkki112233', 'Simon Roope', '$2b$10$9xxGuqHoSSrD5DOg9IzmleIOS1N6HwCzX2dC9OQHh5loUT4KmcmzG', 'simonroope@email.com' );
 insert into users ( id_hash, name, password, email ) values ( '0xiiikkki112234', 'Scrooge McDuck', '$2b$10$wGys0G5H3Vd/SJV2BPCW7exnFwzW27tFHvn1g05NFo/Ui.Y5lZgVu', 'scrooge@email.com' );
 
 \echo 'CREATE CATEGORIES DATA'
