@@ -1,0 +1,14 @@
+
+
+
+DB_USER = '' # 'ben@' as example
+
+DB_PORT = 5432
+
+SERVER_PORT = 3001
+
+DB_HOST = 'localhost'
+
+DB_NAME = 'okane'
+
+SUPER_SECRET_KEY = XXXX

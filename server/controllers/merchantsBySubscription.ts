@@ -2,13 +2,14 @@ import Koa from 'koa';
 import db from '../models/db';
 import { Op } from 'sequelize';
 import { firstOfXMonthsAgo } from '../utils/dates';
+import { ArrayMerchantRecordType, MerchantBySubscriptionOutputType, MerchantBySubscriptionType } from '../models/customTypes';
 
 export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
   try {
 
     const result = await db.transactions.findAll({
       where: {
-        user_id_hash: '0xiiikkki112233',
+        user_id_hash: ctx.state.id_hash,
         date: {
           [Op.gt]: firstOfXMonthsAgo(12),
         },
@@ -35,22 +36,6 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
       ],
     });
 
-  interface MerchantBySubscriptionType {
-      month_end_date: string;
-      merchant: {name: string,
-                 short_name: string};
-      value: number;
-    }
-
-    interface ArrayMerchantRecordType {
-      [ key: string ]: number;
-    }
-
-    interface MerchantBySubscriptionOutputType {
-      [ key: string ]: number | string
-    }
-
-
    const months: any = {}
 
    result.forEach((element: MerchantBySubscriptionType) => { 
@@ -61,7 +46,7 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
      months[element.month_end_date].push(merchObj)
   })
 
-  const def: {}[] = []
+  const def: MerchantBySubscriptionOutputType[] = []
   for (let month in months) {
     const completeMonthObj : MerchantBySubscriptionOutputType = { monthEndDate: month }
     for ( let merch of months[month] ) {
@@ -70,6 +55,27 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
     }
     def.push(completeMonthObj)
   }
+
+    // Intentionally break the list by removing one month of disney.
+    // const aprilData = def[3];
+    // delete aprilData["disney"];
+
+    // In case of missing values for some months, we populate all subscriptions for all months, but add
+    // zero values where the subscription was not populated.
+    const subscriptionList = new Set<string>;
+    for (let month of def) {
+      for (let key in month) {
+        if (key !== 'monthEndDate') subscriptionList.add(key)
+      }
+    }
+
+    for (let month of def) {
+      for (let setSub of subscriptionList) {
+        if (!Object.keys(month).includes(setSub)){
+          month[setSub] = "0";
+        }
+      }
+    }
 
     ctx.body =def;
     ctx.status = 200;
