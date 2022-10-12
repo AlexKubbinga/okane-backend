@@ -9,7 +9,7 @@ export const getTransactionsByMerchant = async (ctx: Koa.Context) => {
       where: {
         user_id_hash: '0xiiikkki112233',
         date: {
-          [Op.gt]: firstOfXMonthsAgo(2),
+          [Op.gt]: firstOfXMonthsAgo(12),
         },
       },
       attributes: [
@@ -56,7 +56,7 @@ export const getTransactionsByMerchant = async (ctx: Koa.Context) => {
   }, {});
 
     //const output = { month: result[0].month_end_date, trans };
-    const output = months;
+    const output = trans;
 
     ctx.body = output;
     ctx.status = 200;

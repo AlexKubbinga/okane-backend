@@ -10,7 +10,7 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
       where: {
         user_id_hash: '0xiiikkki112233',
         date: {
-          [Op.gt]: firstOfXMonthsAgo(1),
+          [Op.gt]: firstOfXMonthsAgo(12),
         },
       },
       attributes: [
@@ -35,17 +35,43 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
       ],
     });
 
-    const merchs = result.map((merch: any) => {
-      console.log('merchId ', merch.merchant)
-      return {
-        name: merch.merchant.short_name,
-        monthlyPrice: Number(merch.value),
-      };
-    });
+  interface MerchantBySubscriptionType {
+      month_end_date: string;
+      merchant: {name: string,
+                 short_name: string};
+      value: number;
+    }
 
-    const output = { month: result[0].month_end_date, merchs };
+    interface ArrayMerchantRecordType {
+      [ key: string ]: number;
+    }
 
-    ctx.body = output;
+    interface MerchantBySubscriptionOutputType {
+      [ key: string ]: number | string
+    }
+
+
+   const months: any = {}
+
+   result.forEach((element: MerchantBySubscriptionType) => { 
+     if(!months[element.month_end_date]) { months[element.month_end_date] = [] as ArrayMerchantRecordType[] }
+     const merchObj : ArrayMerchantRecordType = {
+      [element.merchant.short_name] : element.value
+     }
+     months[element.month_end_date].push(merchObj)
+  })
+
+  const def: {}[] = []
+  for (let month in months) {
+    const completeMonthObj : MerchantBySubscriptionOutputType = { monthEndDate: month }
+    for ( let merch of months[month] ) {
+      const key = Object.keys(merch)[0]
+      completeMonthObj[key] = merch[key]
+    }
+    def.push(completeMonthObj)
+  }
+
+    ctx.body =def;
     ctx.status = 200;
   } catch (err) {
     console.log('Err @getMerchantsBySubscription', err);
