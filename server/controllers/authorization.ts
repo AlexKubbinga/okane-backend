@@ -1,4 +1,4 @@
-import { Request, Response, NextFunction, Router } from 'express';
+import { NextFunction } from 'express';
 import { CookieType } from '../models/customTypes';
 import bcrypt from 'bcrypt';
 import { createSession, expireSession } from '../session/stateless';
@@ -16,7 +16,6 @@ export type BodyRegister = {
 };
 
 export const register = async (ctx: Koa.Context) => {
-  console.log('Calling the register controller');
   try {
     const body = ctx.request.body as BodyRegister;
     //generate new password
@@ -31,16 +30,13 @@ export const register = async (ctx: Koa.Context) => {
       password: hashedPassword,
     });
 
+    // TODO: Update the cookie options here to make them more secure/http only
     const sessionJwt = createSession(newUser.id_hash);
-    console.log('New session JWT created: ', sessionJwt);
-    // TODO: Update the cookie options here to make them more secure
     ctx.cookies.set('sessionJwt', sessionJwt);
 
-    console.log('New User created: ', newUser);
     ctx.status = 200;
     ctx.body = newUser;
   } catch (error) {
-    // console.log(error)
     ctx.status = 500;
   }
 };
@@ -49,6 +45,7 @@ export type BodyLogin = {
   email: string;
   password: string;
 };
+
 // //LOGIN
 export const login = async (ctx: Koa.Context) => {
   try {
@@ -74,8 +71,8 @@ export const login = async (ctx: Koa.Context) => {
 
     const sessionJwt = createSession(user.id_hash);
     console.log('New session JWT created: ', sessionJwt);
-    // TODO: Update the cookie options here to make them more secure
     ctx.cookies.set('sessionJwt', sessionJwt);
+
     ctx.body = sessionJwt;
     ctx.status = 200;
   } catch (error) {
@@ -90,7 +87,7 @@ const validateJwt = (cookie: CookieType) => {
   const currentTimeStamp = new Date().getTime() / 1000;
   const jwtExpired = cookie.expiresAt <= currentTimeStamp;
   // TODO: Check the JWT hash?
-  // Do we want an error?
+  // Do we want to throw an error?
   // if (jwtExpired) {
   //   throw new Error('Invalid cookie');
   // }
@@ -102,14 +99,12 @@ export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
   try {
     const jwt = ctx.cookies.get('sessionJwt') || false;
     if (jwt) {
-      // console.log('Token found: ', jwt);
       const cookie: CookieType = jwt_decode(jwt);
       if (cookie && validateJwt(cookie)) {
         ctx.state.id_hash = cookie.id_hash;
         console.log('Successful checkToken - running next middleware with cookie: ', cookie);
         return next();
       } else {
-        // throw new Error('No cookie present');
         console.log('No cookie present');
         ctx.status = 200;
       }

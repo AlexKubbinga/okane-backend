@@ -4,7 +4,6 @@ import * as dotenv from 'dotenv';
 import db from './models/db';
 import route from './router';
 import bodyParser from 'koa-bodyparser';
-import { test } from './models/db';
 import { checkToken } from './controllers/authorization';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
@@ -15,6 +14,7 @@ const cors = require('@koa/cors');
 
 app.use(cors({ allroutes: true, origin: '*', credentials: true }));
 app.use(bodyParser());
+
 // Middleware to use/decode jwt and pass on user ID.
 app.use(function (ctx, next) {
   if (ctx.url === '/login' || ctx.url === '/register') return next();
@@ -26,5 +26,3 @@ app.use(route.routes());
   await db.sequelize.sync();
   app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
 })();
-
-// sync your db

@@ -6,6 +6,8 @@ import { getSubscriptions } from './controllers/subscriptions';
 import { getMerchants } from './controllers/merchants';
 import { getTransactions } from './controllers/transactions';
 import { getTransactionsByCategory } from './controllers/transactionsByCategory';
+import { getTransactionsByMerchant } from './controllers/transactionsByMerchant';
+import { getMerchantsBySubscription} from './controllers/merchantsBySubscription';
 import {
   login,
   register,
@@ -27,6 +29,8 @@ router.get('/getMerchants', getMerchants);
 router.get('/getTransactions', getTransactions);
 router.get('/getTransactionsByCategory', getTransactionsByCategory);
 router.get('/subscriptions', getTransactionsBySubscription);
+router.get('/getTransactionsByMerchant', getTransactionsByMerchant);
+router.get('/getMerchantsBySubscription/:sub', getMerchantsBySubscription);
 
 // Authentication routes
 router.post('/register', register);

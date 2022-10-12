@@ -1,7 +1,4 @@
 import jwt from 'jsonwebtoken';
-// import {}
-
-const SUPER_SECRET_KEY = 'IS_GREGOR_ASLEEP?';
 
 interface SessionDataPayload extends jwt.JwtPayload {
 	expiresAt: number;
@@ -13,23 +10,24 @@ export const createSession = (id_hash: string) => {
 	expiry.setDate(expiry.getDate() + 1);
 
 	const newSession = {
-		// No sessionId needed as session data is stored in token
 		expiresAt: expiry.valueOf(),
 		id_hash: id_hash,
 	};
-	return jwt.sign(newSession, SUPER_SECRET_KEY);
+	return jwt.sign(newSession, process.env.SUPER_SECRET_KEY as string);
 };
+
 
 export const expireSession = () => {
 	const newSession = {
 		expiresAt: -1,
 		id_hash: 'Nope',
 	};
-	return jwt.sign(newSession, SUPER_SECRET_KEY);
+	return jwt.sign(newSession, process.env.SUPER_SECRET_KEY as string);
 };
 
+
 export const getSession = (token: string) => {
-	const sessionData = <SessionDataPayload>jwt.verify(token, SUPER_SECRET_KEY);
+	const sessionData = <SessionDataPayload>jwt.verify(token, process.env.SUPER_SECRET_KEY as string);
 
 	if (sessionData.expiresAt < Date.now()) {
 		console.log('Token has expired.');
