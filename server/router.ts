@@ -7,7 +7,7 @@ import { getMerchants } from './controllers/merchants';
 import { getTransactions } from './controllers/transactions';
 import { getTransactionsByCategory } from './controllers/transactionsByCategory';
 import { getTransactionsByMerchant } from './controllers/transactionsByMerchant';
-import { getMerchantsBySubscription} from './controllers/merchantsBySubscription';
+import { getMerchantsBySubscription } from './controllers/merchantsBySubscription';
 import {
   login,
   register,
@@ -27,10 +27,10 @@ router.get('/getMerchants', getMerchants);
 
 // Transaction routes
 router.get('/getTransactions', getTransactions);
-router.get('/getTransactionsByCategory', getTransactionsByCategory);
+router.get('/categories', getTransactionsByCategory);
 router.get('/subscriptions', getTransactionsBySubscription);
-router.get('/getTransactionsByMerchant', getTransactionsByMerchant);
-router.get('/getMerchantsBySubscription/:sub', getMerchantsBySubscription);
+router.get('/calendar', getTransactionsByMerchant); // calendar
+router.get('/merchants/:sub', getMerchantsBySubscription);
 
 // Authentication routes
 router.post('/register', register);

@@ -16,7 +16,7 @@ const NAME = process.env.DB_NAME;
 
 const sequelize = new Sequelize(`postgres://${USER}${HOST}:${PORT}/${NAME}`, {
   timestamps: false,
-  logging: false
+  logging: false,
 });
 interface DbModel {
   [key: string]: any;
@@ -50,13 +50,6 @@ db.users.hasMany(db.transactions, {
 db.transactions.belongsTo(db.users, {
   foreignKey: 'user_id',
 });
-
-// db.subscriptions.hasMany(db.transactions, {
-//   foreignKey: 'subscription_id',
-// });
-// db.transactions.belongsTo(db.subscriptions, {
-//   foreignKey: 'subscription_id',
-// });
 
 db.merchants.hasMany(db.transactions, {
   foreignKey: 'merchant_id',
