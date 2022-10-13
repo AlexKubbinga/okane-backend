@@ -2,12 +2,13 @@ import Koa from 'koa';
 import db from '../models/db';
 import { Op } from 'sequelize';
 import { firstOfXMonthsAgo } from '../utils/dates';
+import { ArrayMerchantRecordType, MerchantBySubscriptionOutputType, MerchantBySubscriptionType } from '../models/customTypes';
 
 export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
   try {
     const result = await db.transactions.findAll({
       where: {
-        user_id_hash: '0xiiikkki112233',
+        user_id_hash: ctx.state.id_hash,
         date: {
           [Op.gt]: firstOfXMonthsAgo(12),
         },
@@ -66,19 +67,38 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
       months[element.month_end_date].push(merchObj);
     });
 
-    const def: {}[] = [];
-    for (let month in months) {
-      const completeMonthObj: MerchantBySubscriptionOutputType = {
-        monthEndDate: month,
-      };
-      for (let merch of months[month]) {
-        const key = Object.keys(merch)[0];
-        completeMonthObj[key] = merch[key];
+  const def: MerchantBySubscriptionOutputType[] = []
+  for (let month in months) {
+    const completeMonthObj : MerchantBySubscriptionOutputType = { monthEndDate: month }
+    for ( let merch of months[month] ) {
+      const key = Object.keys(merch)[0]
+      completeMonthObj[key] = merch[key]
+    }
+    def.push(completeMonthObj)
+  }
+
+    // Intentionally break the list by removing one month of disney.
+    // const aprilData = def[3];
+    // delete aprilData["disney"];
+
+    // In case of missing values for some months, we populate all subscriptions for all months, but add
+    // zero values where the subscription was not populated.
+    const subscriptionList = new Set<string>;
+    for (let month of def) {
+      for (let key in month) {
+        if (key !== 'monthEndDate') subscriptionList.add(key)
       }
-      def.push(completeMonthObj);
     }
 
-    ctx.body = def;
+    for (let month of def) {
+      for (let setSub of subscriptionList) {
+        if (!Object.keys(month).includes(setSub)){
+          month[setSub] = "0";
+        }
+      }
+    }
+
+    ctx.body =def;
     ctx.status = 200;
   } catch (err) {
     console.log('Err @getMerchantsBySubscription', err);
