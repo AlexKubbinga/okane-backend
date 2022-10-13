@@ -2,7 +2,7 @@ import Router from 'koa-router';
 const router = new Router();
 import { postUserData, getUserData } from './controllers/users';
 import { getCategories } from './controllers/categories';
-import { getSubscriptions } from './controllers/subscriptions';
+import { getSubscriptionName, getSubscriptions } from './controllers/subscriptions';
 import { getMerchants } from './controllers/merchants';
 import { getTransactions } from './controllers/transactions';
 import { getTransactionsByCategory } from './controllers/transactionsByCategory';
@@ -23,6 +23,7 @@ router.get('/getUsers', getUserData);
 // Category routes
 router.get('/getCategories', getCategories);
 router.get('/getSubscriptions', getSubscriptions);
+router.get('/subscriptions/:sub', getSubscriptionName);
 router.get('/getMerchants', getMerchants);
 
 // Transaction routes

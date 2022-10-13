@@ -95,14 +95,19 @@ const validateJwt = (cookie: CookieType) => {
   return !jwtExpired;
 };
 
-export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
+function delay(ms: number) {
+  return new Promise( resolve => setTimeout(resolve, ms) );
+}
+
+export const checkToken = async (ctx: Koa.Context, next: NextFunction) => {
   try {
+    // await delay(2000);
     const jwt = ctx.cookies.get('sessionJwt') || false;
     if (jwt) {
       const cookie: CookieType = jwt_decode(jwt);
       if (cookie && validateJwt(cookie)) {
         ctx.state.id_hash = cookie.id_hash;
-        console.log('Successful checkToken - running next middleware with cookie: ', cookie);
+        // console.log('Successful checkToken - running next middleware with cookie: ', cookie);
         return next();
       } else {
         console.log('No cookie present');
@@ -111,13 +116,13 @@ export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
     }
   } catch (err) {
     console.log('Error in token check: ', err);
-  }
+  };
 };
 
 // ONCE THE CHECKTOKEN ABOVE HAS VALIDATED WE CAN PROVIDE THE USERID
 export const validated = (ctx: Koa.Context) => {
   try {
-    console.log('Cookie validated, sending user ID: ', ctx.state.id_hash);
+    // console.log('Cookie validated, sending user ID: ', ctx.state.id_hash);
     ctx.body = JSON.stringify({ userId: ctx.state.id_hash });
   } catch (err) {
     console.log('Error in server validated cookie response: ', err);

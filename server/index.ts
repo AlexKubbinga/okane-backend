@@ -16,9 +16,9 @@ app.use(cors({ allroutes: true, origin: '*', credentials: true }));
 app.use(bodyParser());
 
 // Middleware to use/decode jwt and pass on user ID.
-app.use(function (ctx, next) {
+app.use(async function (ctx, next) {
   if (ctx.url === '/login' || ctx.url === '/register') return next();
-  return checkToken(ctx, next);
+  return await checkToken(ctx, next);
 });
 app.use(route.routes());
 

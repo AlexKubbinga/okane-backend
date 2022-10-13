@@ -98,6 +98,8 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
       }
     }
 
+    console.log('Final analysis data: ', def);
+
     ctx.body =def;
     ctx.status = 200;
   } catch (err) {

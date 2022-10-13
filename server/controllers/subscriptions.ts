@@ -20,3 +20,15 @@ export const getSubscriptions = async (ctx: Koa.Context) => {
 		console.log('Error @getSubscriptions:', err);
 	}
 };
+
+export const getSubscriptionName = async (ctx: Koa.Context) => {
+	try {
+		const sub = await db.subscriptions.findOne({ where: {
+			code: ctx.params.sub
+		}});
+		ctx.body = { name: sub.name };
+		ctx.status = 200;
+	} catch (err) {
+		console.log('Error getting subscription name: ', err);
+	}
+}
