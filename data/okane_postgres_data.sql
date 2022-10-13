@@ -2,7 +2,10 @@
  Simon Roope 9/10/2022
  Create Okane Postgres data
  /Applications/Postgres.app/Contents/Versions/14/bin/psql -p5432 "simonroope" -f --echo-all okane_postgres_data.sql
+
+ 13/10/2022 - Add random User1 streaminig transactions
 */
+
 \set ON_ERROR_STOP on
 
 \echo 'TRUNCATE TABLES'
@@ -17,7 +20,7 @@ truncate table users cascade;
 \echo 'CREATE DATA'
 
 \echo 'CREATE USERS DATA'
-insert into users ( id_hash, name, password, email ) values ( '0xiiikkki112233', 'Simon Roope', '1234', 'simonroope@email.com' );
+insert into users ( id_hash, name, password, email ) values ( '0xiiikkki112233', 'Simon Roope', '$2b$10$9xxGuqHoSSrD5DOg9IzmleIOS1N6HwCzX2dC9OQHh5loUT4KmcmzG', 'simonroope@email.com' );
 insert into users ( id_hash, name, password, email ) values ( '0xiiikkki112234', 'Scrooge McDuck', '$2b$10$wGys0G5H3Vd/SJV2BPCW7exnFwzW27tFHvn1g05NFo/Ui.Y5lZgVu', 'scrooge@email.com' );
 
 \echo 'CREATE CATEGORIES DATA'
@@ -42,42 +45,43 @@ insert into subscriptions ( code, name ) values ( 'TVL', 'Travel' );
 insert into subscriptions ( code, name ) values ( 'WAT', 'Water' );
 
 \echo 'CREATE MERCHANTS DATA'
-insert into merchants ( code, name, short_name ) values ( 'AMZN', 'Amazon Prime', 'prime' );
-insert into merchants ( code, name, short_name ) values ( 'APPL', 'Apple', 'apple' );
-insert into merchants ( code, name, short_name ) values ( 'BTS', 'BT Sport', 'bt sport' );
-insert into merchants ( code, name, short_name ) values ( 'DIS', 'Disney', 'disney' );
-insert into merchants ( code, name, short_name ) values ( 'ESPT', 'Eurosport', 'eurosport' );
-insert into merchants ( code, name, short_name ) values ( 'NFLX', 'Netflix', 'netflix' );
-insert into merchants ( code, name, short_name ) values ( 'NOW', 'Now TV', 'nowtv' );
-insert into merchants ( code, name, short_name ) values ( 'SKY', 'Sky', 'sky' );
-insert into merchants ( code, name, short_name ) values ( 'SPT', 'Spotify', 'spotify' );
+insert into merchants ( code, name, short_name ) values ( 'AMZN', 'Amazon Prime', 'Amazon_Prime' );
+insert into merchants ( code, name, short_name ) values ( 'APPL', 'Apple', 'Apple' );
+insert into merchants ( code, name, short_name ) values ( 'APTV', 'Apple TV', 'Apple_TV' );
+insert into merchants ( code, name, short_name ) values ( 'BTS', 'BT Sport', 'BT_Sport' );
+insert into merchants ( code, name, short_name ) values ( 'DIS', 'Disney', 'Disney' );
+insert into merchants ( code, name, short_name ) values ( 'ESPT', 'Eurosport', 'Eurosport' );
+insert into merchants ( code, name, short_name ) values ( 'NFLX', 'Netflix', 'Netflix' );
+insert into merchants ( code, name, short_name ) values ( 'NOW', 'Now', 'Now' );
+insert into merchants ( code, name, short_name ) values ( 'SKY', 'Sky', 'Sky' );
+insert into merchants ( code, name, short_name ) values ( 'SPT', 'Spotify', 'Spotify' );
 
-insert into merchants ( code, name, short_name ) values ( 'BT', 'BT', 'bt' );
-insert into merchants ( code, name, short_name ) values ( 'VMED', 'Virgin Media', 'virgin' );
+insert into merchants ( code, name, short_name ) values ( 'BT', 'BT', 'BT' );
+insert into merchants ( code, name, short_name ) values ( 'VMED', 'Virgin Media', 'Virgin_Media' );
 
-insert into merchants ( code, name, short_name ) values ( 'BMW', 'BMW', 'bmw' );
-insert into merchants ( code, name, short_name ) values ( 'KRX', 'Kia', 'kia' );
+insert into merchants ( code, name, short_name ) values ( 'BMW', 'BMW', 'BMW' );
+insert into merchants ( code, name, short_name ) values ( 'KRX', 'Kia', 'Kia' );
 
-insert into merchants ( code, name, short_name ) values ( 'FF', 'Fitness First', 'fitness first' );
-insert into merchants ( code, name, short_name ) values ( 'PTON', 'Peleton', 'pelton' );
+insert into merchants ( code, name, short_name ) values ( 'FF', 'Fitness First', 'Fitness_First' );
+insert into merchants ( code, name, short_name ) values ( 'PTON', 'Peleton', 'Peleton' );
 
-insert into merchants ( code, name, short_name ) values ( 'EON', 'E.on', 'e.on' );
-insert into merchants ( code, name, short_name ) values ( 'OOA', 'Octopus', 'octopus' );
+insert into merchants ( code, name, short_name ) values ( 'EON', 'E.on', 'E.on' );
+insert into merchants ( code, name, short_name ) values ( 'OOA', 'Octopus', 'Octopus' );
 
-insert into merchants ( code, name, short_name ) values ( 'TFL', 'TFL', 'tfl' );
-insert into merchants ( code, name, short_name ) values ( 'UBER', 'Uber', 'uber' );
+insert into merchants ( code, name, short_name ) values ( 'TFL', 'TFL', 'TFL' );
+insert into merchants ( code, name, short_name ) values ( 'UBER', 'Uber', 'Uber' );
 
-insert into merchants ( code, name, short_name ) values ( 'SBRY', 'Sainsburys', 'sainsburys' );
-insert into merchants ( code, name, short_name ) values ( 'TSCO', 'Tesco', 'tesco' );
+insert into merchants ( code, name, short_name ) values ( 'SBRY', 'Sainsburys', 'Sainsburys' );
+insert into merchants ( code, name, short_name ) values ( 'TSCO', 'Tesco', 'Tesco' );
 
-insert into merchants ( code, name, short_name ) values ( 'SBUX', 'Starbucks', 'starbucks' );
+insert into merchants ( code, name, short_name ) values ( 'SBUX', 'Starbucks', 'Starbucks' );
 
-insert into merchants ( code, name, short_name ) values ( 'EE', 'EE', 'ee' );
-insert into merchants ( code, name, short_name ) values ( 'VOD', 'Vodafone', 'vodafone' );
+insert into merchants ( code, name, short_name ) values ( 'EE', 'EE', 'EE' );
+insert into merchants ( code, name, short_name ) values ( 'VOD', 'Vodafone', 'Vodafone' );
 
-insert into merchants ( code, name, short_name ) values ( 'NAT', 'Nationwide', 'nationwide' );
+insert into merchants ( code, name, short_name ) values ( 'NAT', 'Nationwide', 'Nationwide' );
 
-insert into merchants ( code, name, short_name ) values ( 'HFX', 'Halifax', 'halifax' );
+insert into merchants ( code, name, short_name ) values ( 'HFX', 'Halifax', 'Halifax' );
 
 \echo 'CREATE TRANSACTION DATA'
 
@@ -888,6 +892,73 @@ values
   (select id from subscriptions where code = 'CCD'),
   (select id from categories where code = 'MON'),
   56.56, 200.38, 16.01
+);
+
+\echo User 1 - Additonal Streaming
+insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
+values
+(
+  '2022-05-14 01:00:00-00', '2022-05-31 01:00:00-00', 'GBP',
+  (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
+  (select id from merchants where code = 'NOW'),
+  (select id from subscriptions where code = 'STR'),
+  (select id from categories where code = 'ENT'),
+  8.99, 8.99
+);
+
+insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
+values
+(
+  '2022-07-07 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
+  (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
+  (select id from merchants where code = 'NOW'),
+  (select id from subscriptions where code = 'STR'),
+  (select id from categories where code = 'ENT'),
+  8.99, 15.98
+);
+
+insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
+values
+(
+  '2022-07-15 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
+  (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
+  (select id from merchants where code = 'NOW'),
+  (select id from subscriptions where code = 'STR'),
+  (select id from categories where code = 'ENT'),
+  8.99, 26.97
+);
+
+insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
+values
+(
+  '2022-07-07 01:00:00-00', '2022-07-31 01:00:00-00', 'GBP',
+  (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
+  (select id from merchants where code = 'NOW'),
+  (select id from subscriptions where code = 'STR'),
+  (select id from categories where code = 'ENT'),
+  11.98, 41.95
+);
+
+insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
+values
+(
+  '2022-07-07 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
+  (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
+  (select id from merchants where code = 'APTV'),
+  (select id from subscriptions where code = 'STR'),
+  (select id from categories where code = 'ENT'),
+  4.99, 4.99
+);
+
+insert into transactions ( date, month_end_date, ccy, user_id, user_id_hash, merchant_id, subscription_id, category_id, value, value_ytd )
+values
+(
+  '2022-08-08 01:00:00-00', '2022-08-31 01:00:00-00', 'GBP',
+  (select id from users where name = 'Simon Roope'), (select id_hash from users where name = 'Simon Roope'),
+  (select id from merchants where code = 'APTV'),
+  (select id from subscriptions where code = 'STR'),
+  (select id from categories where code = 'ENT'),
+  4.99, 9.98
 );
 
 
