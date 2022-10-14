@@ -15,7 +15,9 @@ import {
   validated,
 } from './controllers/authorization';
 import { getTransactionsBySubscription } from './controllers/transactionsBySubscription';
+import { updateCategory } from './controllers/updateCategory';
 
+// TODO clean router
 // User routes
 router.post('/postUsers', postUserData);
 router.get('/getUsers', getUserData);
@@ -37,5 +39,8 @@ router.post('/register', register);
 router.post('/login', login);
 router.get('/validate', validated);
 router.get('/remove', removeToken);
+
+// Update Category
+router.put('/category', updateCategory);
 
 export default router;
