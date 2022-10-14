@@ -13,15 +13,15 @@ export const updateCategory = async (ctx: Koa.Context) => {
   try {
     console.log('running Update category');
     let output = { data: {}, error: null } as responseType;
-    const { merchant_id, newCategory_id } = ctx.request.body as updateBody;
+    const body = ctx.request.body as updateBody;
     console.log(ctx.request.body);
 
     const result = await db.transactions.update(
-      { category_id: newCategory_id },
+      { category_id: body.newCategory_id },
       {
         where: {
           user_id_hash: ctx.state.id_hash,
-          merchant_id: merchant_id,
+          merchant_id: body.merchant_id,
         },
       }
     );
