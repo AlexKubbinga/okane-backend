@@ -38,4 +38,8 @@ router.post('/login', login);
 router.get('/validate', validated);
 router.get('/remove', removeToken);
 
+router.get('/testroute', (ctx, next) => {
+  ctx.body = '<h1>Server route test</h1>'
+})
+
 export default router;
