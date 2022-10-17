@@ -8,12 +8,8 @@ import { getTransactions } from './controllers/transactions';
 import { getTransactionsByCategory } from './controllers/transactionsByCategory';
 import { getTransactionsByMerchant } from './controllers/transactionsByMerchant';
 import { getMerchantsBySubscription } from './controllers/merchantsBySubscription';
-import {
-  login,
-  register,
-  removeToken,
-  validated,
-} from './controllers/authorization';
+import { tinkOAuth } from './controllers/oauthOB';
+import { login, register, removeToken, validated } from './controllers/authorization';
 import { getTransactionsBySubscription } from './controllers/transactionsBySubscription';
 import { updateCategory } from './controllers/updateCategory';
 
@@ -42,5 +38,8 @@ router.get('/remove', removeToken);
 
 // Update Category
 router.put('/category', updateCategory);
+
+//Open Banking Verification
+router.get('/callback', tinkOAuth);
 
 export default router;

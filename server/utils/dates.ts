@@ -7,3 +7,7 @@ export const firstOfXMonthsAgo = (x: number) => {
   // var lastDay = new Date(Date.UTC(y, m + 1, 1));
   return firstDay;
 };
+
+export const scaleValue = (unscaled_val: string, scale: string) => {
+  return Math.round(Number(unscaled_val) * 10 ** -Number(scale) * 100) / 100;
+};
