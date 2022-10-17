@@ -39,7 +39,7 @@ router.get('/validate', validated);
 router.get('/remove', removeToken);
 
 router.get('/testroute', (ctx, next) => {
-  ctx.body = '<h1>Server route test</h1>'
+  ctx.body = '<h1>Server test route</h1>'
 })
 
 export default router;
