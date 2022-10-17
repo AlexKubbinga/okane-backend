@@ -43,4 +43,9 @@ router.get('/remove', removeToken);
 // Update Category
 router.put('/category', updateCategory);
 
+// Test route
+router.get('/testroute', (ctx, next) => {
+  ctx.body = '<h1>Server test route</h1>'
+})
+
 export default router;
