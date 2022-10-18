@@ -1,5 +1,15 @@
 import Koa from 'koa';
-import { firstOfXMonthsAgo, scaleValue } from '../utils/dates';
+import { literal } from 'sequelize';
+import db from '../models/db';
+import { firstOfXMonthsAgo, monthEndDate, scaleValue } from '../utils/dates';
+import {
+  findOrCreateMerchant_id,
+  findOrCreateUnknownSub,
+  findOrCreateUnknownCat,
+  getAccessCode,
+  getUserID,
+  getTransactionsFromOB,
+} from './OBDataInputFunctions';
 
 // import fetch from 'node-fetch';
 
@@ -10,45 +20,27 @@ type auth = {
 };
 
 export const tinkOAuth = async (ctx: Koa.Context) => {
-  console.log('ctx query', ctx.query);
+  console.log(ctx.query);
   const code = ctx.query.code as string;
-  const credentials_id = ctx.query.credentials_id as string;
   const client_id = process.env.TINK_CLIENT_ID;
   const client_secret = process.env.TINK_SECRET;
 
-  let response = await fetch('https://api.tink.com/api/v1/oauth/token', {
-    body: `code=${code}&client_id=${client_id}&client_secret=${client_secret}&grant_type=authorization_code`,
-    headers: {
-      'Content-Type': 'application/x-www-form-urlencoded',
-    },
-    method: 'POST',
-  });
-  const output = (await response.json()) as auth;
-
-  const { access_token, expires_in, refresh_token } = output;
-
-  const auth_header = new Headers();
-  auth_header.set('Authorization', `Bearer ${access_token}`);
-
-  const date = firstOfXMonthsAgo(1).toISOString().substring(0, 10);
-  const transactionsRes = await fetch(
-    `https://api.tink.com/data/v2/transactions?bookedDateGte=${date}`,
-    { headers: auth_header }
+  const verificationOutput = await getAccessCode(
+    code,
+    client_id,
+    client_secret
   );
-  const transactions: {
-    transactions: {
-      id: string;
-      accountId: string;
-      amount: {
-        value: { unscaledValue: string; scale: string };
-        currencyCode: string;
-      };
-      descriptions: { original: string; display: string };
-      dates: { booked: string };
-    }[];
-    nextPageToken: string;
-  } = await transactionsRes.json();
-  console.log('TRANSACTIONS: ', transactions);
+
+  const { access_token, expires_in, refresh_token } = verificationOutput;
+
+  const transactions = await getTransactionsFromOB(access_token);
+
+  const user_id = await getUserID(ctx.state.id_hash);
+
+  // To add to DB incase doesn't exist on someone's local DB
+  const [UnknownSub, createdS] = await findOrCreateUnknownSub();
+
+  const [UnknownCat, createdC] = await findOrCreateUnknownCat();
 
   for (let entry of transactions.transactions) {
     const merchant = entry.descriptions.display;
@@ -56,7 +48,42 @@ export const tinkOAuth = async (ctx: Koa.Context) => {
       entry.amount.value.unscaledValue,
       entry.amount.value.scale
     );
+    const positive_value = value * -1;
+    const dateTrans = new Date(entry.dates.booked);
+    const month_end_date = monthEndDate(entry.dates.booked);
+    const ccy = entry.amount.currencyCode;
+
+    const merchant_id = await findOrCreateMerchant_id(merchant, value);
+    if (merchant_id === null) continue;
+
+    const subAndCatIDs = await db.transactions.findOne({
+      where: { merchant_id: merchant_id },
+      attributes: ['subscription_id', 'category_id'],
+    });
+
+    let category_id;
+    let subscription_id;
+
+    if (subAndCatIDs === null) {
+      category_id = UnknownCat.dataValues.id;
+      subscription_id = UnknownSub.dataValues.id;
+    } else {
+      subscription_id = subAndCatIDs.dataValues.subscription_id;
+      category_id = subAndCatIDs.dataValues.category_id;
+    }
+
+    const created = await db.transactions.create({
+      date: dateTrans,
+      month_end_date: month_end_date,
+      ccy: ccy,
+      user_id: user_id,
+      user_id_hash: ctx.state.id_hash,
+      merchant_id: merchant_id,
+      subscription_id: subscription_id,
+      category_id: category_id,
+      value: positive_value,
+    });
   }
 
-  ctx.redirect('http://localhost:3000/callback');
+  ctx.redirect('http://localhost:3000/');
 };

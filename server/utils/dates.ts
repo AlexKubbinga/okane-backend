@@ -11,3 +11,11 @@ export const firstOfXMonthsAgo = (x: number) => {
 export const scaleValue = (unscaled_val: string, scale: string) => {
   return Math.round(Number(unscaled_val) * 10 ** -Number(scale) * 100) / 100;
 };
+
+export const monthEndDate = (date: string) => {
+  const original = new Date(date);
+  let y = original.getFullYear();
+  let m = original.getMonth();
+  const lastDay = new Date(Date.UTC(y, m + 1, 0));
+  return lastDay;
+};

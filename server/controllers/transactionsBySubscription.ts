@@ -3,7 +3,7 @@ import { SubscriptionFactory } from '../models/subscriptions';
 import db from '../models/db';
 import sequelize from 'sequelize';
 import { Op } from 'sequelize';
-import { firstOfXMonthsAgo } from '../utils/dates';
+import { firstOfXMonthsAgo, monthEndDate } from '../utils/dates';
 
 export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
   try {
@@ -16,12 +16,11 @@ export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
         },
       },
       attributes: [
-        'month_end_date',
         'subscription.id',
         'subscription_id',
         [sequelize.fn('sum', sequelize.col('value')), 'value'],
       ],
-      group: ['subscription.id', 'subscription_id', 'month_end_date', 'name'],
+      group: ['subscription.id', 'subscription_id', 'name'],
       include: [
         {
           model: db.subscriptions,
@@ -37,7 +36,10 @@ export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
         name: sub.subscription.name,
       };
     });
-    const output = { month: result[0].month_end_date, subs };
+    const output = {
+      month: monthEndDate(new Date().toISOString()),
+      subs,
+    };
     console.log('WE HAVE RUN: ', output);
     ctx.body = output;
     ctx.status = 200;
