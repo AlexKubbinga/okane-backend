@@ -49,9 +49,9 @@ router.get('/callback', tinkOAuth);
 
 router.get('/subscriptionCode/:merchant_id', getSubscriptionCode);
 
-// Test route
-router.get('/testroute', (ctx, next) => {
-  ctx.body = '<h1>Server test route</h1>';
+// Route with no db connection
+router.get('/serverOnly', (ctx, next) => {
+  ctx.body = '<h1>Server only route</h1>';
 });
 
 export default router;
