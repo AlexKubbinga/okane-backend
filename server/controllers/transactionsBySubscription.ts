@@ -40,7 +40,6 @@ export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
       month: monthEndDate(new Date().toISOString()),
       subs,
     };
-    console.log('WE HAVE RUN: ', output);
     ctx.body = output;
     ctx.status = 200;
   } catch (err) {

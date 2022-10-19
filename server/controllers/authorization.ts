@@ -17,7 +17,6 @@ export type BodyRegister = {
 
 export const register = async (ctx: Koa.Context) => {
   try {
-    console.log('REGISTERING USER');
     const body = ctx.request.body as BodyRegister;
     //generate new password
     const salt = await bcrypt.genSalt(10);
@@ -33,7 +32,6 @@ export const register = async (ctx: Koa.Context) => {
 
     // TODO: Update the cookie options here to make them more secure/http only
     const sessionJwt = createSession(newUser.id_hash);
-    console.log('SESSIONJWT FROM REGISTER ', sessionJwt);
     ctx.cookies.set('sessionJwt', sessionJwt);
 
     ctx.status = 200;
@@ -52,7 +50,6 @@ export type BodyLogin = {
 export const login = async (ctx: Koa.Context) => {
   try {
     const body = ctx.request.body as BodyLogin;
-    console.log('Body from request: ', body);
     const user = await db.users.findOne({
       where: { email: body?.email },
     });
@@ -61,7 +58,6 @@ export const login = async (ctx: Koa.Context) => {
       ctx.body = 'User Not Found';
       return;
     }
-    console.log('User found on db: ', user);
 
     const validPassword = await bcrypt.compare(body.password, user.password);
 

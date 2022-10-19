@@ -10,7 +10,6 @@ import {
 
 export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
   try {
-    console.log('PARAMS', ctx.params);
     const result = await db.transactions.findAll({
       where: {
         user_id_hash: ctx.state.id_hash,

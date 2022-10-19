@@ -1,6 +1,8 @@
 import { summaryScreenMock } from '../models/mocks';
 import db from '../models/db';
 import Koa from 'koa';
+import { CookieType } from '../models/customTypes';
+import jwt_decode from 'jwt-decode'
 
 // export const getSubscriptions = (ctx: Koa.Context) => {
 // 	try {
@@ -22,7 +24,7 @@ export const getSubscriptions = async (ctx: Koa.Context) => {
 };
 
 export const getSubscriptionName = async (ctx: Koa.Context) => {
-	try {
+	try {		
 		const sub = await db.subscriptions.findOne({ where: {
 			code: ctx.params.sub
 		}});
@@ -35,13 +37,15 @@ export const getSubscriptionName = async (ctx: Koa.Context) => {
 
 export const getSubscriptionForMerchant = async (ctx: Koa.Context) => {
 	try {
-		console.log('Trying to get subscription for merchant: ', ctx.params.merch);
-		const subscription_id = await db.transactions.findOne({ 
-			where: {merchant_id : parseInt(ctx.params.merch)}
+		const subscription = await db.transactions.findOne({ 
+			where: {merchant_id :ctx.params.merch}
 		});
-		console.log(`Sub ID for merchant ${ctx.params.merch}: `, subscription_id );
-		ctx.body = { subscription_id };
-		ctx.status = 200;
+		if (subscription) {
+			ctx.body = subscription;
+			ctx.status = 200;
+		} else {
+			ctx.status = 204;
+		}
 	} catch (err) {
 		console.log('Error getting subscription name: ', err);
 	}

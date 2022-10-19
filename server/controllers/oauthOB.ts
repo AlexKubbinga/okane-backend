@@ -20,7 +20,6 @@ type auth = {
 };
 
 export const tinkOAuth = async (ctx: Koa.Context) => {
-  console.log(ctx.query);
   const code = ctx.query.code as string;
   const client_id = process.env.TINK_CLIENT_ID;
   const client_secret = process.env.TINK_SECRET;
