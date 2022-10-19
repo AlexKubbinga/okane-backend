@@ -11,10 +11,8 @@ type updateBody = {
 
 export const updateCategory = async (ctx: Koa.Context) => {
   try {
-    console.log('running Update category');
     let output = { data: {}, error: null } as responseType;
     const body = ctx.request.body as updateBody;
-    console.log(ctx.request.body);
 
     const result = await db.transactions.update(
       { category_id: body.newCategory_id },
@@ -25,6 +23,7 @@ export const updateCategory = async (ctx: Koa.Context) => {
         },
       }
     );
+
     if (result[0] !== 1) {
       // failed to update
       output.error = true;

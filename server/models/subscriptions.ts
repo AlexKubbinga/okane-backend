@@ -24,6 +24,7 @@ export const SubscriptionFactory = (
       type: DataTypes.NUMBER,
       allowNull: false,
       primaryKey: true,
+      autoIncrement: true,
     },
     code: {
       type: DataTypes.STRING,

@@ -8,6 +8,7 @@ import { getTransactions } from './controllers/transactions';
 import { getTransactionsByCategory } from './controllers/transactionsByCategory';
 import { getTransactionsByMerchant } from './controllers/transactionsByMerchant';
 import { getMerchantsBySubscription } from './controllers/merchantsBySubscription';
+import { tinkOAuth } from './controllers/oauthOB';
 import {
   login,
   register,
@@ -16,6 +17,7 @@ import {
 } from './controllers/authorization';
 import { getTransactionsBySubscription } from './controllers/transactionsBySubscription';
 import { updateCategory } from './controllers/updateCategory';
+import { getSubscriptionCode } from './controllers/subscriptionCode';
 
 // TODO clean router
 // User routes
@@ -44,5 +46,15 @@ router.get('/remove', removeToken);
 
 // Update Category
 router.put('/category', updateCategory);
+
+//Open Banking Verification
+router.get('/callback', tinkOAuth);
+
+router.get('/subscriptionCode/:merchant_id', getSubscriptionCode);
+
+// Test route
+router.get('/testroute', (ctx, next) => {
+  ctx.body = '<h1>Server test route</h1>';
+});
 
 export default router;

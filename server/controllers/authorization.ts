@@ -5,7 +5,7 @@ import { createSession, expireSession } from '../session/stateless';
 import jwt_decode from 'jwt-decode';
 import db from '../models/db';
 import Koa from 'koa';
-import {v4 as uuidv4} from 'uuid';
+import { v4 as uuidv4 } from 'uuid';
 
 // //REGISTER
 
@@ -17,6 +17,7 @@ export type BodyRegister = {
 
 export const register = async (ctx: Koa.Context) => {
   try {
+    console.log('REGISTERING USER');
     const body = ctx.request.body as BodyRegister;
     //generate new password
     const salt = await bcrypt.genSalt(10);
@@ -32,6 +33,7 @@ export const register = async (ctx: Koa.Context) => {
 
     // TODO: Update the cookie options here to make them more secure/http only
     const sessionJwt = createSession(newUser.id_hash);
+    console.log('SESSIONJWT FROM REGISTER ', sessionJwt);
     ctx.cookies.set('sessionJwt', sessionJwt);
 
     ctx.status = 200;
@@ -52,7 +54,7 @@ export const login = async (ctx: Koa.Context) => {
     const body = ctx.request.body as BodyLogin;
     console.log('Body from request: ', body);
     const user = await db.users.findOne({
-      where: { email: body?.email }
+      where: { email: body?.email },
     });
     if (!user) {
       ctx.status = 404;
