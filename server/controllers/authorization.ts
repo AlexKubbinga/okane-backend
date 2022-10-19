@@ -101,7 +101,7 @@ function delay(ms: number) {
 
 export const checkToken = async (ctx: Koa.Context, next: NextFunction) => {
   try {
-    // await delay(2000);
+    // await delay(1000);
     const jwt = ctx.cookies.get('sessionJwt') || false;
     if (jwt) {
       const cookie: CookieType = jwt_decode(jwt);
@@ -110,6 +110,7 @@ export const checkToken = async (ctx: Koa.Context, next: NextFunction) => {
         // console.log('Successful checkToken - running next middleware with cookie: ', cookie);
         return next();
       } else {
+        // TODO: return a flag to make the front-end log out.
         console.log('No cookie present');
         ctx.status = 200;
       }

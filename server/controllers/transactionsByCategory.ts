@@ -7,6 +7,7 @@ import sequelize from 'sequelize';
 
 export const getTransactionsByCategory = async (ctx: Koa.Context) => {
   try {
+    console.log(firstOfXMonthsAgo(0));
     const result = await db.transactions.findAll({
       where: {
         user_id_hash: ctx.state.id_hash,
@@ -37,11 +38,8 @@ export const getTransactionsByCategory = async (ctx: Koa.Context) => {
             [Op.gt]: firstOfXMonthsAgo(1),
           },
         },
-        attributes: [
-          'value',
-          [sequelize.fn('sum', sequelize.col('value')), 'value'],
-        ],
-        group: ['category.id', 'name', 'value'],
+        attributes: [[sequelize.fn('sum', sequelize.col('value')), 'value']],
+        group: ['category.id', 'name'],
         include: [
           {
             model: db.categories,

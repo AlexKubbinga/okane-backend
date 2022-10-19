@@ -32,3 +32,17 @@ export const getSubscriptionName = async (ctx: Koa.Context) => {
 		console.log('Error getting subscription name: ', err);
 	}
 }
+
+export const getSubscriptionForMerchant = async (ctx: Koa.Context) => {
+	try {
+		console.log('Trying to get subscription for merchant: ', ctx.params.merch);
+		const subscription_id = await db.transactions.findOne({ 
+			where: {merchant_id : parseInt(ctx.params.merch)}
+		});
+		console.log(`Sub ID for merchant ${ctx.params.merch}: `, subscription_id );
+		ctx.body = { subscription_id };
+		ctx.status = 200;
+	} catch (err) {
+		console.log('Error getting subscription name: ', err);
+	}
+}

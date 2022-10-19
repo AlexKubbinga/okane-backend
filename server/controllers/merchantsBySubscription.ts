@@ -2,10 +2,15 @@ import Koa from 'koa';
 import db from '../models/db';
 import { Op } from 'sequelize';
 import { firstOfXMonthsAgo } from '../utils/dates';
-import { ArrayMerchantRecordType, MerchantBySubscriptionOutputType, MerchantBySubscriptionType } from '../models/customTypes';
+import {
+  ArrayMerchantRecordType,
+  MerchantBySubscriptionOutputType,
+  MerchantBySubscriptionType,
+} from '../models/customTypes';
 
 export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
   try {
+    console.log('PARAMS', ctx.params);
     const result = await db.transactions.findAll({
       where: {
         user_id_hash: ctx.state.id_hash,
@@ -35,7 +40,7 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
         {
           model: db.subscriptions,
           attributes: [],
-          where: { code: ctx.params.sub },
+          where: { code: [ctx.params.sub] },
           required: true,
         },
       ],
@@ -67,15 +72,17 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
       months[element.month_end_date].push(merchObj);
     });
 
-  const def: MerchantBySubscriptionOutputType[] = []
-  for (let month in months) {
-    const completeMonthObj : MerchantBySubscriptionOutputType = { monthEndDate: month }
-    for ( let merch of months[month] ) {
-      const key = Object.keys(merch)[0]
-      completeMonthObj[key] = merch[key]
+    const def: MerchantBySubscriptionOutputType[] = [];
+    for (let month in months) {
+      const completeMonthObj: MerchantBySubscriptionOutputType = {
+        monthEndDate: month,
+      };
+      for (let merch of months[month]) {
+        const key = Object.keys(merch)[0];
+        completeMonthObj[key] = merch[key];
+      }
+      def.push(completeMonthObj);
     }
-    def.push(completeMonthObj)
-  }
 
     // Intentionally break the list by removing one month of disney.
     // const aprilData = def[3];
@@ -83,24 +90,22 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
 
     // In case of missing values for some months, we populate all subscriptions for all months, but add
     // zero values where the subscription was not populated.
-    const subscriptionList = new Set<string>;
+    const subscriptionList = new Set<string>();
     for (let month of def) {
       for (let key in month) {
-        if (key !== 'monthEndDate') subscriptionList.add(key)
+        if (key !== 'monthEndDate') subscriptionList.add(key);
       }
     }
 
     for (let month of def) {
       for (let setSub of subscriptionList) {
-        if (!Object.keys(month).includes(setSub)){
-          month[setSub] = "0";
+        if (!Object.keys(month).includes(setSub)) {
+          month[setSub] = '0';
         }
       }
     }
 
-    console.log('Final analysis data: ', def);
-
-    ctx.body =def;
+    ctx.body = def;
     ctx.status = 200;
   } catch (err) {
     console.log('Err @getMerchantsBySubscription', err);
