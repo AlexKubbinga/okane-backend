@@ -1,4 +1,4 @@
-import { NextFunction } from 'express';
+import { Next } from 'koa';
 import { CookieType } from '../models/customTypes';
 import bcrypt from 'bcrypt';
 import { createSession, expireSession } from '../session/stateless';
@@ -6,8 +6,6 @@ import jwt_decode from 'jwt-decode';
 import db from '../models/db';
 import Koa from 'koa';
 import { v4 as uuidv4 } from 'uuid';
-
-// //REGISTER
 
 export type BodyRegister = {
   email: string;
@@ -97,14 +95,17 @@ const validateJwt = (cookie: CookieType) => {
   return !jwtExpired;
 };
 
-export const checkToken = (ctx: Koa.Context, next: NextFunction) => {
+export const checkToken = (ctx: Koa.Context, next: Next) => {
   try {
     const jwt = ctx.cookies.get('sessionJwt') || false;
     if (jwt) {
       const cookie: CookieType = jwt_decode(jwt);
       if (cookie && validateJwt(cookie)) {
         ctx.state.id_hash = cookie.id_hash;
-        console.log('Successful checkToken - running next middleware with cookie: ', cookie);
+        console.log(
+          'Successful checkToken - running next middleware with cookie: ',
+          cookie
+        );
         return next();
       } else {
         console.log('No cookie present');

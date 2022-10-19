@@ -1,9 +1,9 @@
-export const firstOfXMonthsAgo = (x: number) => {
+export const firstOfXMonthsAgo = (num_months_ago: number) => {
   const today = new Date();
   let date = new Date(),
     y = date.getFullYear(),
     m = date.getMonth();
-  var firstDay = new Date(Date.UTC(y, m - x, 1));
+  var firstDay = new Date(Date.UTC(y, m - num_months_ago, 1));
   // var lastDay = new Date(Date.UTC(y, m + 1, 1));
   return firstDay;
 };

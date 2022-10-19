@@ -24,13 +24,12 @@ import { getSubscriptionCode } from './controllers/subscriptionCode';
 router.post('/postUsers', postUserData);
 router.get('/getUsers', getUserData);
 
-// Category routes
-router.get('/getCategories', getCategories);
-router.get('/getSubscriptions', getSubscriptions);
-router.get('/getMerchants', getMerchants);
+// Table Routes
+router.get('/categoriesList', getCategories);
+router.get('/subscriptionsList', getSubscriptions);
+router.get('/merchantsList', getMerchants);
+router.get('/transactionsList', getTransactions);
 
-// Transaction routes
-router.get('/getTransactions', getTransactions);
 router.get('/categories', getTransactionsByCategory);
 router.get('/subscriptions', getTransactionsBySubscription);
 router.get('/calendar', getTransactionsByMerchant); // calendar
