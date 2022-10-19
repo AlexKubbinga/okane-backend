@@ -22,7 +22,7 @@ export const getTransactionsByMerchant = async (ctx: Koa.Context) => {
       include: [
         {
           model: db.subscriptions,
-          attributes: ['name'],
+          attributes: ['code','name'],
           required: true,
         },
         {
@@ -35,27 +35,15 @@ export const getTransactionsByMerchant = async (ctx: Koa.Context) => {
 
     const trans = result.map((tran: any) => {
       return {
-        monthEndDate: tran.month_end_date,
+        month_end_date: tran.month_end_date,
         date: tran.date,
-        subName: tran.subscription.name,
-        merchName: tran.merchant.name,
-        dailyPrice: Number(tran.value),
+        subscription_code: tran.subscription.code,
+        subscription_name: tran.subscription.name,
+        merchant_name: tran.merchant.name,
+        price: Number(tran.value),
       };
     });
 
-    //  TODO : reduce to reformat
-
-    //   const categoryPosts = posts.reduce((acc, post) => {
-    //     let {id, category} = post;
-    //     return {...acc, [category]: [...(acc[category] || []), id]};
-    // }, {});
-
-    const months = trans.reduce((acc: any, mon: any) => {
-      let { date, subName, merchName, dailyPrice, monthEndDate } = mon;
-      return { ...acc, [monthEndDate]: [...(acc[monthEndDate] || []), date] };
-    }, {});
-
-    //const output = { month: result[0].month_end_date, trans };
     const output = trans;
 
     ctx.body = output;
