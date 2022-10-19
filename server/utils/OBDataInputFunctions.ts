@@ -1,6 +1,6 @@
 import { CreatedAt } from 'sequelize-typescript';
 import db from '../models/db';
-import { firstOfXMonthsAgo } from '../utils/dates';
+import { firstOfXMonthsAgo } from './dates';
 
 type auth = {
   access_token: string;
@@ -33,13 +33,13 @@ export const findOrCreateMerchant_id = async (
 
 export const findOrCreateUnknownSub = async () => {
   return await db.subscriptions.findOrCreate({
-    where: { name: 'Unknown Subscription', code: 'UNDEF' },
+    where: { name: 'Other', code: 'UNDEF' },
   });
 };
 
 export const findOrCreateUnknownCat = async () => {
   return await db.categories.findOrCreate({
-    where: { name: 'Unknown Category', code: 'UNDEF' },
+    where: { name: 'Other', code: 'UNDEF' },
   });
 };
 
