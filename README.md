@@ -12,7 +12,7 @@ We are in the process of getting approved to the Open Banking Implementation Ent
 
 
 ### Front-end
-The front-end repository can be found using (this link.)[https://github.com/flowerco/okane]
+The front-end repository can be found using [this link.](https://github.com/flowerco/okane)
 
 ### Contributors
 
