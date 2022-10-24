@@ -1,6 +1,6 @@
-# Okane Backend
+# Okané Backend
 
-This is the backend for Okane, which is a spending tracker that leverages Open Banking to allow individuals to get personalized insights into how they spend their money.
+This is the backend for Okané, which is a spending tracker that leverages Open Banking to allow individuals to get personalized insights into how they spend their money.
 
 The server is made using Koa and is connected to a Postgres Database.
 
