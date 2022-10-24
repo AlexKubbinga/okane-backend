@@ -2,7 +2,7 @@
 
 This is the backend for Okané, which is a spending tracker that leverages Open Banking to allow individuals to get personalized insights into how they spend their money.
 
-The server is made using Koa and is connected to a Postgres Database.
+The server is made using Koa and is connected to a Postgres Database through the ORM Sequelize. 
 
 The database uses a Dimensional model to allow for referential integrity and performant data access.
 
