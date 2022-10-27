@@ -27,31 +27,32 @@ router.get('/getUsers', getUserData);
 // Table Routes
 router.get('/categoriesList', getCategories);
 router.get('/subscriptionsList', getSubscriptions);
-router.get('/merchantsList', getMerchants);
+router.get('/api/merchantsList', getMerchants);
 router.get('/transactionsList', getTransactions);
 
-router.get('/categories', getTransactionsByCategory);
-router.get('/subscriptions', getTransactionsBySubscription);
-router.get('/calendar', getTransactionsByMerchant); // calendar
-router.get('/merchants/:sub', getMerchantsBySubscription);
+router.get('/api/categories', getTransactionsByCategory);
+router.get('/api/subscriptions', getTransactionsBySubscription);
+router.get('/api/calendar', getTransactionsByMerchant); // calendar
+router.get('/api/merchants/:sub', getMerchantsBySubscription);
 
 // Authentication routes
-router.post('/register', register);
-router.post('/login', login);
-router.get('/validate', validated);
-router.get('/remove', removeToken);
+router.post('/api/register', register);
+router.post('/api/login', login);
+router.get('/api/validate', validated);
+router.get('/api/remove', removeToken);
 
 // Update Category
-router.put('/category', updateCategory);
+router.put('/api/category', updateCategory);
 
 //Open Banking Verification
 router.get('/callback', tinkOAuth);
 
-router.get('/subscriptionCode/:merchant_id', getSubscriptionCode);
+router.get('/api/subscriptionCode/:merchant_id', getSubscriptionCode);
 
 // Route with no db connection
-router.get('/serverOnly', (ctx, next) => {
-  ctx.body = '<h1>Server only route</h1>';
+router.get('/api/serverOnly', (ctx, next) => {
+  console.log(`/serverOnly `)
+  ctx.body = '<h1>Server only api route</h1>';
 });
 
 export default router;
