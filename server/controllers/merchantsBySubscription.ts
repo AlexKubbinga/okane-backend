@@ -17,6 +17,7 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
           [Op.gt]: firstOfXMonthsAgo(12),
         },
       },
+      order: [ ['month_end_date', 'ASC'] ],
       attributes: [
         'month_end_date',
         'merchant.id',
@@ -82,10 +83,6 @@ export const getMerchantsBySubscription = async (ctx: Koa.Context) => {
       }
       def.push(completeMonthObj);
     }
-
-    // Intentionally break the list by removing one month of disney.
-    // const aprilData = def[3];
-    // delete aprilData["disney"];
 
     // In case of missing values for some months, we populate all subscriptions for all months, but add
     // zero values where the subscription was not populated.

@@ -5,15 +5,15 @@ import { SequelizeAttributes } from '../SequelizeAttributes';
 export interface TransactionTypeAttributes {
   date: Date;
   month_end_date: Date;
-  ccy: String;
-  user_id: Number;
-  user_id_hash: String;
-  merchant_id: Number;
-  subscription_id: Number;
-  category_id: Number;
-  value: Number;
-  value_ytd: Number;
-  value_ly: Number;
+  ccy: string;
+  user_id: number;
+  user_id_hash: string;
+  merchant_id: number;
+  subscription_id: number;
+  category_id: number;
+  value: number;
+  value_ytd: number;
+  value_ly: number;
 }
 
 export interface TransactionMethods
@@ -68,6 +68,7 @@ export const TransactionFactory = (
       allowNull: true,
     },
     value_ly: {
+      //last_year
       type: DataTypes.NUMBER,
       allowNull: true,
     },

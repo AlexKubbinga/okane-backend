@@ -1,4 +1,4 @@
-import { NextFunction } from 'express';
+import { Next } from 'koa';
 import { CookieType } from '../models/customTypes';
 import bcrypt from 'bcrypt';
 import { createSession, expireSession } from '../session/stateless';
@@ -6,8 +6,6 @@ import jwt_decode from 'jwt-decode';
 import db from '../models/db';
 import Koa from 'koa';
 import { v4 as uuidv4 } from 'uuid';
-
-// //REGISTER
 
 export type BodyRegister = {
   email: string;
@@ -97,7 +95,7 @@ function delay(ms: number) {
   return new Promise( resolve => setTimeout(resolve, ms) );
 }
 
-export const checkToken = async (ctx: Koa.Context, next: NextFunction) => {
+export const checkToken = async (ctx: Koa.Context, next: Next) => {
   try {
     // await delay(1000);
     const jwt = ctx.cookies.get('sessionJwt') || false;

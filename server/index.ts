@@ -17,7 +17,7 @@ app.use(bodyParser());
 
 // Middleware to use/decode jwt and pass on user ID.
 app.use(async function (ctx, next) {
-  if (ctx.url === '/login' || ctx.url === '/register') return next();
+  if (ctx.url === '/api/login' || ctx.url === '/api/register') return next();
   return await checkToken(ctx, next);
 });
 app.use(route.routes());

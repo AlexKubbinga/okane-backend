@@ -9,15 +9,8 @@ import {
   getAccessCode,
   getUserID,
   getTransactionsFromOB,
-} from './OBDataInputFunctions';
-
-// import fetch from 'node-fetch';
-
-type auth = {
-  access_token: string;
-  expires_in: number;
-  refresh_token: string;
-};
+} from '../utils/OBDataInputFunctions';
+import { standardizeName } from '../utils/merchantNameManipulation';
 
 export const tinkOAuth = async (ctx: Koa.Context) => {
   const code = ctx.query.code as string;
@@ -42,7 +35,7 @@ export const tinkOAuth = async (ctx: Koa.Context) => {
   const [UnknownCat, createdC] = await findOrCreateUnknownCat();
 
   for (let entry of transactions.transactions) {
-    const merchant = entry.descriptions.display;
+    const merchant = standardizeName(entry.descriptions.display);
     const value = scaleValue(
       entry.amount.value.unscaledValue,
       entry.amount.value.scale

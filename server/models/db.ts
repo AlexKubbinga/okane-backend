@@ -9,15 +9,23 @@ import path from 'path';
 import * as dotenv from 'dotenv';
 
 dotenv.config({ path: path.resolve(__dirname, '../../.env') });
-const PORT = process.env.DB_PORT;
-const USER = process.env.DB_USER;
-const HOST = process.env.DB_HOST;
-const NAME = process.env.DB_NAME;
+// const PORT = process.env.DB_PORT;
+// const USER = process.env.DB_USER;
+// const HOST = process.env.DB_HOST;
+// const NAME = process.env.DB_NAME;
 
-const sequelize = new Sequelize(`postgres://${USER}${HOST}:${PORT}/${NAME}`, {
-  timestamps: false,
+// const sequelize = new Sequelize(`postgres://${USER}${HOST}:${PORT}/${NAME}`, {
+//   timestamps: false,
+//   logging: false,
+// });
+
+const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+  host: process.env.DB_HOST,
+  dialect: 'postgres',
   logging: false,
+  timestamp: false
 });
+
 interface DbModel {
   [key: string]: any;
 }
