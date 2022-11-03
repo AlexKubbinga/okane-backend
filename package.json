@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "jest",
-    "start": "nodemon server/index.ts"
+    "start:dev": "nodemon server/index.ts",
+    "start": "node server/dist/index.js",
+    "build": "tsc --outDir dist"
   },
   "repository": {
     "type": "git",
