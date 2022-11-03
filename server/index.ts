@@ -5,9 +5,11 @@ import db from './models/db';
 import route from './router';
 import bodyParser from 'koa-bodyparser';
 import { checkToken } from './controllers/authorization';
+import config from './config';
 
 dotenv.config({ path: path.resolve(__dirname, '../.env') });
-const PORT = process.env.SERVER_PORT;
+const PORT = config.serverPort;
+const DB_HOST = config.dbHost;
 
 const app = new Koa();
 const cors = require('@koa/cors');
@@ -24,5 +26,5 @@ app.use(route.routes());
 
 (async () => {
   await db.sequelize.sync();
-  app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+  app.listen(PORT, DB_HOST, () => console.log(`Server running on port ${PORT}`));
 })();

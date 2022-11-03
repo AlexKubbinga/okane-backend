@@ -8,11 +8,11 @@ const config = {
     : 'okane',
 
   dbPort: process.env.DB_PORT
-    ? process.env.DB_PORT
+    ? parseInt(process.env.DB_PORT)
     : 5432,
 
   serverPort: process.env.SERVER_PORT
-  ? process.env.SERVER_PORT
+  ? parseInt(process.env.SERVER_PORT)
   : 3001, 
 }
 

@@ -19,12 +19,20 @@ dotenv.config({ path: path.resolve(__dirname, '../../.env') });
 //   logging: false,
 // });
 
-const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
-  host: process.env.DB_HOST,
-  dialect: 'postgres',
-  logging: false,
-  timestamp: false
-});
+// const sequelize = new Sequelize(process.env.DB_NAME, process.env.DB_USER, process.env.DB_PASS, {
+//   host: process.env.DB_HOST,
+//   dialect: 'postgres',
+//   logging: false,
+//   timestamp: false
+// });
+
+const DB_URL = process.env.DATABASE_URL || 'postgres://postgres@localhost:5432/okane';
+const sequelize = new Sequelize(DB_URL,
+  {
+    dialect: 'postgres',
+    logging: false,
+    timestamp: false
+  })
 
 interface DbModel {
   [key: string]: any;
