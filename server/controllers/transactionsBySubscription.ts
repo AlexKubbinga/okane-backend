@@ -37,7 +37,7 @@ export const getTransactionsBySubscription = async (ctx: Koa.Context) => {
       };
     });
     const output = {
-      month: monthEndDate(new Date().toISOString()),
+      month: monthEndDate(new Date(2022, 9, 1).toISOString()),
       subs,
     };
     ctx.body = output;

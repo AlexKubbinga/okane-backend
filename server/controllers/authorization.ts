@@ -6,6 +6,7 @@ import jwt_decode from 'jwt-decode';
 import db from '../models/db';
 import Koa from 'koa';
 import { v4 as uuidv4 } from 'uuid';
+import { SessionOptions } from 'http2';
 
 export type BodyRegister = {
   email: string;
@@ -30,7 +31,7 @@ export const register = async (ctx: Koa.Context) => {
 
     // TODO: Update the cookie options here to make them more secure/http only
     const sessionJwt = createSession(newUser.id_hash);
-    ctx.cookies.set('sessionJwt', sessionJwt);
+    ctx.cookies.set('sessionJwt', sessionJwt, { sameSite: 'none', secure: true, httpOnly: true });
 
     ctx.status = 200;
     ctx.body = newUser;
@@ -67,7 +68,7 @@ export const login = async (ctx: Koa.Context) => {
 
     const sessionJwt = createSession(user.id_hash);
     console.log('New session JWT created: ', sessionJwt);
-    ctx.cookies.set('sessionJwt', sessionJwt);
+    ctx.cookies.set('sessionJwt', sessionJwt, { sameSite: 'none', secure: true, httpOnly: true });
 
     ctx.body = sessionJwt;
     ctx.status = 200;
@@ -99,18 +100,21 @@ export const checkToken = async (ctx: Koa.Context, next: Next) => {
   try {
     // await delay(1000);
     const jwt = ctx.cookies.get('sessionJwt') || false;
+    console.log('JWT received: ', jwt)
     if (jwt) {
       const cookie: CookieType = jwt_decode(jwt);
       if (cookie && validateJwt(cookie)) {
         ctx.state.id_hash = cookie.id_hash;
-        // console.log('Successful checkToken - running next middleware with cookie: ', cookie);
+        console.log('Successful checkToken - running next middleware with cookie: ', cookie);
         return next();
       } else {
         // TODO: return a flag to make the front-end log out.
-        console.log('No cookie present');
+        console.log('Invalid jwt - logging out');
         ctx.status = 200;
       }
     }
+    console.log('No cookie received')
+    ctx.status = 403;
   } catch (err) {
     console.log('Error in token check: ', err);
   };
@@ -130,7 +134,7 @@ export const removeToken = (ctx: Koa.Context) => {
   try {
     const sessionJwt = expireSession();
     console.log('Expired JWT created: ', sessionJwt);
-    ctx.cookies.set('sessionJwt', sessionJwt);
+    ctx.cookies.set('sessionJwt', sessionJwt, { sameSite: 'none', secure: true, httpOnly: true });
     ctx.status = 204;
   } catch (err) {
     console.log('Error removing cookie in backend: ', err);

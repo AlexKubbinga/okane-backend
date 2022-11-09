@@ -14,7 +14,13 @@ const DB_HOST = config.dbHost;
 const app = new Koa();
 const cors = require('@koa/cors');
 
-app.use(cors({ allroutes: true, origin: '*', credentials: true }));
+app.proxy = true;
+
+app.use(cors({ 
+  allroutes: true, 
+  origin: 'https://okane-money.netlify.app', 
+  credentials: true 
+}));
 app.use(bodyParser());
 
 // Middleware to use/decode jwt and pass on user ID.

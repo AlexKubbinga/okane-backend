@@ -1,6 +1,7 @@
 export const firstOfXMonthsAgo = (num_months_ago: number) => {
-  const today = new Date();
-  let date = new Date(),
+  // Note: remember months start at 0 in JS dates.
+  const today = new Date(2022, 9, 1);
+  let date = new Date(2022, 9, 1),
     y = date.getFullYear(),
     m = date.getMonth();
   var firstDay = new Date(Date.UTC(y, m - num_months_ago, 1));
